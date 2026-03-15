@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Historia – La Pizza Cubana · Puerto Vallarta</title>
+<meta name="description" content="La historia completa de la pizza cubana: cómo sobrevivió el Período Especial, llegó a Miami, y llegó a Puerto Vallarta. / The full history of Cuban pizza.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@300;400;500;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5EDD8;--cream-dark:#EAD9B8;--paprika:#C0392B;--paprika-dark:#922B21;--charcoal:#1A1209;--tobacco:#2C1A0E;--ochre:#C97A2A;--ochre-light:#E8A84C;--ash:#7A6550;--warm-white:#FDF8F0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--charcoal);font-family:'Libre Baskerville',Georgia,serif;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cur{width:12px;height:12px;border-radius:50%;background:var(--paprika);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;mix-blend-mode:multiply;}
+.cur-ring{width:40px;height:40px;border:1.5px solid var(--paprika);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .28s cubic-bezier(.25,.46,.45,.94);opacity:.45;}
+
+/* LANG BAR */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:700;display:flex;justify-content:flex-end;padding:12px 44px;background:linear-gradient(to bottom,rgba(20,12,4,.9),transparent);}
+.lang-btn{display:flex;align-items:center;gap:8px;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cream-dark);background:none;border:1px solid rgba(245,237,216,.22);padding:7px 16px;cursor:pointer;transition:all .3s;}
+.lang-btn:hover{border-color:var(--ochre-light);color:var(--ochre-light);}
+.ldot{width:5px;height:5px;border-radius:50%;background:var(--ochre);}
+
+/* NAV */
+nav{position:fixed;top:42px;left:0;right:0;z-index:600;display:flex;justify-content:space-between;align-items:center;padding:14px 44px;transition:all .4s;}
+nav.stuck{background:rgba(20,12,4,.97);backdrop-filter:blur(10px);top:0;box-shadow:0 2px 30px rgba(0,0,0,.4);}
+.nlogo{font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--cream);text-decoration:none;}
+.nlinks{display:flex;gap:28px;list-style:none;}
+.nlinks a{font-family:'Oswald',sans-serif;font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(245,237,216,.6);text-decoration:none;transition:color .3s;}
+.nlinks a:hover,.nlinks a.active{color:var(--ochre-light);}
+.ncta{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--charcoal);background:var(--ochre-light);padding:10px 20px;text-decoration:none;box-shadow:0 4px 16px rgba(232,168,76,.45),0 2px 6px rgba(0,0,0,.3);transition:all .3s;}
+.ncta:hover{background:var(--cream);}
+
+/* MOBILE NAV TOGGLE */
+.nav-toggle{display:none;background:none;border:1px solid rgba(245,237,216,.3);color:var(--cream);padding:8px 12px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:18px;line-height:1;}
+.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,12,4,.98);z-index:590;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Oswald',sans-serif;font-size:18px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:rgba(245,237,216,.7);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(245,237,216,.07);width:220px;text-align:center;transition:color .3s;}
+.mobile-nav a:hover{color:var(--ochre-light);}
+.mobile-nav-close{position:absolute;top:22px;right:24px;background:none;border:none;color:rgba(245,237,216,.5);font-size:28px;cursor:pointer;}
+
+/* HERO */
+.page-hero{background:var(--tobacco);padding:180px 60px 100px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(192,57,43,.12) 0%,transparent 55%),radial-gradient(ellipse at 80% 50%,rgba(201,122,42,.08) 0%,transparent 60%);}
+.page-hero-img{position:absolute;inset:0;z-index:0;}
+.page-hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(.22) saturate(1.1);}
+.page-hero-content{position:relative;z-index:1;max-width:820px;}
+.breadcrumb{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,237,216,.4);margin-bottom:22px;display:flex;align-items:center;gap:10px;}
+.breadcrumb a{color:var(--ochre);text-decoration:none;}
+.breadcrumb a:hover{color:var(--ochre-light);}
+.breadcrumb-sep{opacity:.3;}
+.page-eyebrow{font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--paprika);margin-bottom:18px;display:flex;align-items:center;gap:13px;}
+.page-eyebrow::before{content:'';width:26px;height:1px;background:var(--paprika);}
+.page-h1{font-family:'Playfair Display',serif;font-size:clamp(46px,7vw,88px);font-weight:900;line-height:.95;color:var(--cream);margin-bottom:16px;}
+.page-h1 em{font-style:italic;color:var(--ochre-light);display:block;}
+.page-sub{font-family:'Oswald',sans-serif;font-size:13px;font-weight:300;letter-spacing:5px;text-transform:uppercase;color:rgba(245,237,216,.45);margin-bottom:32px;}
+.page-intro{font-size:17px;line-height:1.85;color:rgba(245,237,216,.78);max-width:620px;}
+.page-intro strong{color:var(--cream);}
+
+/* LANG DIVIDER */
+.lang-divider{background:var(--paprika-dark);padding:22px 60px;display:flex;align-items:center;gap:20px;}
+.lang-divider-text{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(245,237,216,.5);}
+.lang-pill{font-family:'Oswald',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:6px 14px;border:1px solid;cursor:pointer;transition:all .3s;}
+.lang-pill.es-pill{color:var(--ochre-light);border-color:var(--ochre);}
+.lang-pill.en-pill{color:rgba(245,237,216,.45);border-color:rgba(245,237,216,.15);}
+body.lang-en .lang-pill.en-pill{color:var(--ochre-light);border-color:var(--ochre);}
+body.lang-en .lang-pill.es-pill{color:rgba(245,237,216,.45);border-color:rgba(245,237,216,.15);}
+.lang-divider-line{flex:1;height:1px;background:rgba(245,237,216,.08);}
+
+/* CONTENT AREA */
+.content-wrap{max-width:860px;margin:0 auto;padding:0 60px;}
+.hist-section{padding:80px 0;border-bottom:1px solid rgba(44,26,14,.08);}
+.hist-section:last-child{border:none;}
+.hs-label{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--paprika);margin-bottom:14px;display:flex;align-items:center;gap:13px;}
+.hs-label::before{content:'';width:22px;height:1px;background:var(--paprika);}
+.hs-h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:900;line-height:1.08;color:var(--charcoal);margin-bottom:28px;}
+.hs-h2 em{font-style:italic;color:var(--paprika);}
+.hs-body{font-size:16px;line-height:1.92;color:#3a2a14;margin-bottom:22px;}
+.hs-body strong{color:var(--charcoal);}
+.hs-body em{font-style:italic;}
+.hs-quote{border-left:3px solid var(--ochre);padding:20px 28px;margin:32px 0;background:rgba(201,122,42,.05);}
+.hs-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;line-height:1.5;color:var(--charcoal);margin-bottom:9px;}
+.hs-quote cite{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);}
+.hs-callout{background:var(--tobacco);padding:36px 40px;margin:36px 0;position:relative;overflow:hidden;}
+.hs-callout::before{content:'"';font-family:'Playfair Display',serif;font-size:160px;font-weight:900;color:rgba(201,122,42,.06);position:absolute;top:-20px;right:10px;line-height:1;pointer-events:none;}
+.hs-callout p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.6;color:var(--cream-dark);position:relative;z-index:1;}
+.hs-callout cite{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,237,216,.35);display:block;margin-top:12px;}
+
+/* COMPARISON TABLE */
+.compare-wrap{overflow-x:auto;margin:36px 0;}
+.compare-table{width:100%;border-collapse:collapse;font-size:13px;}
+.compare-table thead tr{background:var(--tobacco);}
+.compare-table th{font-family:'Oswald',sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--ochre-light);padding:14px 16px;text-align:left;white-space:nowrap;}
+.compare-table th:first-child{color:rgba(245,237,216,.45);}
+.compare-table tbody tr{border-bottom:1px solid rgba(44,26,14,.07);}
+.compare-table tbody tr:nth-child(even){background:rgba(44,26,14,.03);}
+.compare-table td{padding:13px 16px;color:#4a3522;line-height:1.55;vertical-align:top;}
+.compare-table td:first-child{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--paprika);}
+.compare-table td strong{color:var(--charcoal);}
+
+/* FIVE RULES */
+.five-rules{background:var(--tobacco);padding:48px;margin:40px 0;}
+.five-rules-title{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ochre-light);margin-bottom:28px;}
+.rule-item{display:flex;align-items:flex-start;gap:18px;padding:14px 0;border-bottom:1px solid rgba(245,237,216,.06);}
+.rule-item:last-child{border:none;}
+.rule-num{font-family:'Playfair Display',serif;font-size:40px;font-weight:900;color:var(--paprika);line-height:1;flex-shrink:0;min-width:38px;}
+.rule-text{font-family:'Libre Baskerville',serif;font-style:italic;font-size:15px;line-height:1.65;color:var(--cream-dark);padding-top:6px;}
+
+/* LANGUAGE SECTION HEADERS */
+.section-lang-header{background:var(--warm-white);padding:60px 60px 0;}
+.section-lang-badge{display:inline-flex;align-items:center;gap:10px;font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--paprika);border:1px solid rgba(192,57,43,.2);padding:8px 16px;margin-bottom:0;}
+.section-lang-badge span{font-size:16px;}
+
+/* ANCHOR TARGET HIGHLIGHT */
+#gouda,#diaspora{scroll-margin-top:100px;}
+
+/* BACK TO TOP */
+.back-top{display:inline-flex;align-items:center;gap:8px;font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--paprika);text-decoration:none;margin-top:48px;padding:10px 0;border-bottom:1px solid rgba(192,57,43,.2);transition:gap .3s;}
+.back-top:hover{gap:14px;}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:60px 60px 38px;}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;margin-bottom:44px;}
+.fbrand{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:4px;color:var(--ochre-light);margin-bottom:11px;}
+.ftagline{font-size:12px;line-height:1.75;color:rgba(245,237,216,.42);max-width:250px;}
+.fcol-title{font-family:'Oswald',sans-serif;font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ochre);margin-bottom:16px;}
+.flinks{list-style:none;}.flinks li{margin-bottom:8px;}
+.flinks a{font-size:12px;color:rgba(245,237,216,.42);text-decoration:none;transition:color .3s;}
+.flinks a:hover{color:var(--cream);}
+.footer-bot{max-width:1200px;margin:0 auto;border-top:1px solid rgba(245,237,216,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;}
+.fcopy{font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:2px;color:rgba(245,237,216,.22);}
+.fpv{font-family:'Caveat',cursive;font-size:14px;color:var(--ochre);}
+
+/* SCROLL ANIMATIONS */
+.r-up{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94);}
+.r-up.on{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+/* MOBILE */
+@media(max-width:920px){
+  body{cursor:auto;}
+  .cur,.cur-ring{display:none;}
+  nav{padding:12px 20px;}.nlinks,.ncta{display:none;}.nav-toggle{display:block;}
+  .page-hero{padding:140px 22px 70px;}
+  .content-wrap{padding:0 22px;}
+  .lang-divider{padding:18px 22px;}
+  .hist-section{padding:56px 0;}
+  .five-rules{padding:32px 22px;}
+  .compare-table{font-size:12px;}
+  .compare-table th,.compare-table td{padding:10px 12px;}
+  footer{padding:44px 20px 30px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  .section-lang-header{padding:44px 22px 0;}
+}
+
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr;}
+}
+
+/* LANGUAGE TOGGLE */
+.lang-es .en{display:none;}
+.lang-en .es{display:none;}
+</style>
+</head>
+<body class="lang-es">
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="cr"></div>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Cerrar menú">✕</button>
+  <a href="index.html" onclick="closeMobileNav()"><span class="es">Inicio</span><span class="en">Home</span></a>
+  <a href="index.html#menu" onclick="closeMobileNav()"><span class="es">Menú</span><span class="en">Menu</span></a>
+  <a href="index.html#chef" onclick="closeMobileNav()"><span class="es">El Chef</span><span class="en">The Chef</span></a>
+  <a href="la-historia.html" onclick="closeMobileNav()"><span class="es">La Historia</span><span class="en">The History</span></a>
+  <a href="index.html#contacto" onclick="closeMobileNav()"><span class="es">Contacto</span><span class="en">Contact</span></a>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn" onclick="tl()" aria-label="Cambiar idioma">
+    <span class="ldot"></span>
+    <span id="ll">English</span>
+  </button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nlogo">🔥 La Pizza Cubana</a>
+  <ul class="nlinks">
+    <li><a href="index.html#historia"><span class="es">Historia</span><span class="en">Story</span></a></li>
+    <li><a href="index.html#menu"><span class="es">Menú</span><span class="en">Menu</span></a></li>
+    <li><a href="index.html#chef"><span class="es">El Chef</span><span class="en">The Chef</span></a></li>
+    <li><a href="la-historia.html" class="active"><span class="es">La Historia</span><span class="en">The History</span></a></li>
+    <li><a href="index.html#blog"><span class="es">Blog</span><span class="en">Blog</span></a></li>
+    <li><a href="index.html#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="nav-toggle" onclick="openMobileNav()" aria-label="Abrir menú">☰</button>
+    <a href="index.html#contacto" class="ncta"><span class="es">Ordenar Ahora</span><span class="en">Order Now</span></a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero" id="top">
+  <div class="page-hero-img">
+    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1600&auto=format&fit=crop&q=80" alt="Pizza cubana auténtica — La Historia" loading="eager"/>
+  </div>
+  <div class="page-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a>
+      <span class="breadcrumb-sep">›</span>
+      <span><span class="es">La Historia</span><span class="en">The History</span></span>
+    </nav>
+    <p class="page-eyebrow"><span class="es">Cuba · Historia · Cultura</span><span class="en">Cuba · History · Culture</span></p>
+    <h1 class="page-h1"><span class="es">La Pizza Cubana:</span><span class="en">Cuban Pizza:</span><em><span class="es">Una Comida de Supervivencia</span><span class="en">A Food of Survival</span></em></h1>
+    <p class="page-sub"><span class="es">La Habana · El Período Especial · Miami · Puerto Vallarta</span><span class="en">Havana · The Special Period · Miami · Puerto Vallarta</span></p>
+    <p class="page-intro"><span class="es"><strong>La pizza cubana no es una variante de la pizza italiana — es su propia tradición</strong>, nacida de recetas de inmigrantes italianos, moldeada por la Revolución y la escasez, y perfeccionada como comida callejera durante la brutal crisis económica de los años noventa.</span><span class="en"><strong>Cuban pizza is not a variation of Italian pizza — it is its own tradition</strong>, born from Italian immigrant recipes, shaped by revolution and scarcity, and perfected as street food during Cuba's devastating 1990s economic crisis.</span></p>
+  </div>
+</section>
+
+<!-- LANGUAGE DIVIDER -->
+<div class="lang-divider">
+  <span class="lang-divider-text">Idioma / Language</span>
+  <button class="lang-pill es-pill" onclick="setLang('es')">🇨🇺 Español</button>
+  <button class="lang-pill en-pill" onclick="setLang('en')">🇺🇸 English</button>
+  <span class="lang-divider-line"></span>
+</div>
+
+<!-- ═══════════════════════════════════════════
+  SPANISH VERSION — FIRST / PRIMERO
+══════════════════════════════════════════ -->
+<div class="es">
+
+<!-- SECTION: INTRO ESPAÑOL -->
+<div class="section-lang-header">
+  <span class="section-lang-badge"><span>🇨🇺</span> En Español</span>
+</div>
+
+<div class="content-wrap">
+
+  <!-- Sección 1: Cómo llegaron las recetas italianas -->
+  <div class="hist-section r-up">
+    <p class="hs-label">Parte I</p>
+    <h2 class="hs-h2">Cómo las recetas italianas se convirtieron en el plato <em>más querido de Cuba</em></h2>
+
+    <p class="hs-body">La pizza llegó a Cuba con los inmigrantes italianos — alrededor de <strong>1,200 italianos llegaron a la Isla allá por los años treinta</strong>, muchos de ellos ingenieros y arquitectos que andaban construyendo iglesias católicas. Trajeron sus recetas, pero Cuba los cogió y los transformó. Para los años cuarenta, la burguesía habanera ya comía en restaurantes italianos como el <strong>Frascati</strong> (en Neptuno y Prado), <strong>Da Rosina</strong> y el <strong>Montecatini</strong> en el Vedado. No eran pizzerías propiamente, pero sembraron la semilla.</p>
+
+    <p class="hs-body">El estallido de verdad vino en los sesenta, después del triunfo de la Revolución. La pizza era barata, rápida y fácil de comer — perfecta para una sociedad que ya empezaba a ajustarse el cinturón. Una cadena de <strong>pizzerías estatales</strong> se regó por "los últimos rincones" de la Isla. Abrió la legendaria <strong>La Vita Nuova</strong> en La Habana, que se volvió tan famosa que su salsa de tomate embotellada — la <em>salsa Vita Nuova</em> — sigue siendo el patrón del oro de la pizza cubana hasta hoy. Otro clásico, <strong>Cinecittà</strong>, abrió en la Calle 23 en el Vedado, bautizado con el nombre de los estudios de cine italianos.</p>
+
+    <div class="hs-quote">
+      <p>"El monumento a la Revolución, de hacerse, debía ser redondo."</p>
+      <cite>— Atribuido a Gabriel García Márquez</cite>
+    </div>
+
+    <p class="hs-body">Las pizzerías del Estado vendían pizza, espagueti y lasaña a <strong>1.20 pesos</strong> — casi nada — y las colas kilométricas en la puerta se volvieron una estampa fija de la vida cotidiana. La pizza, junto con los huevos y los chícharos, fue de lo poco que no faltó. Como dice el cubano: la pizza se volvió <strong>"tan cubana como el congrí"</strong>.</p>
+  </div>
+
+  <!-- Sección 2: El Período Especial -->
+  <div class="hist-section r-up">
+    <p class="hs-label">Parte II</p>
+    <h2 class="hs-h2">El Período Especial forjó la <em>identidad verdadera</em> de la pizza cubana</h2>
+
+    <p class="hs-body">El <em>Período Especial</em> arrancó en 1990 cuando se cayó la Unión Soviética y Cuba perdió de un golpe el <strong>80% de su comercio exterior</strong> y unos subsidios anuales de <strong>4,300 millones de dólares</strong>. Las importaciones de alimentos se desplomaron un 75%. El PIB se achicó un 35% en cinco años. El cubano promedio bajó entre <strong>10 y 20 libras</strong>. A eso le llamaron <em>"el tiempo de los flacos"</em>.</p>
+
+    <p class="hs-body">En medio de esa crisis, la pizza cubana cuajó en algo que no existe en ningún otro lugar del planeta: <strong>la pizzería a pie de calle</strong> — una ventanita en la pared de una casa particular, con un hornito de carbón adentro, donde con cuatro cosas que había se hacía la comida más barata del barrio. Esas <em>ventanitas de pizza</em> se multiplicaron hasta que no quedó una cuadra en ningún pueblo de Cuba sin su letrerito de "Pizzería". Sin mesas, sin sillas, sin protocolo. Pedías por la ventanita, te daban la pizza en un papel, <strong>la dobabas por la mitad</strong> y te la comías caminando. Eso es lo cubano: <em>"se dobla por la mitad y se le da mordiscos"</em>.</p>
+
+    <div class="hs-callout">
+      <p>"En Cuba la pizza fue imprescindible en el Período Especial porque era lo que había."</p>
+      <cite>— Joan Trujillo, pizzero cubano</cite>
+    </div>
+
+    <p class="hs-body">Todo en la pizza cubana huele a inventar con lo que hay. El queso escaseaba y el pizzero buscaba la vuelta — muchas veces <em>por la izquierda</em>. La harina estaba racionada, así que la masa se estiraba con más levadura y más azúcar para que rindiera. La salsa se endulzaba con <em>azúcar prieta</em>, un toque caribeño que hacía que un poquito de tomate alcanzara para bastante.</p>
+  </div>
+
+  <!-- Sección 3: Por qué es única -->
+  <div class="hist-section r-up" id="gouda">
+    <p class="hs-label">Parte III</p>
+    <h2 class="hs-h2">Por qué la pizza cubana no se parece a <em>ninguna otra pizza del mundo</em></h2>
+
+    <p class="hs-body">La pizza cubana rompe casi todas las reglas de la pizza italiana. Aquí están sus señas de identidad, bien explicadas:</p>
+
+    <p class="hs-body"><strong>La masa.</strong> Gruesa, suave y <em>esponjosa</em> — más parecida al pan cubano que a la masa italiana. Lleva <strong>leche, azúcar, sal y aceite</strong> además de la harina y la levadura de más, y da una rueda personal de unos 17 centímetros, blandita por dentro y con <strong>los bordes tostaditos y crujientes</strong>. La prueba de fuego es una sola: <em>que se pueda doblar y la masa no se parta</em>. Si se rompe, esa masa no está bien.</p>
+
+    <p class="hs-body"><strong>El queso.</strong> Aquí está la diferencia más grande con la pizza italiana. <strong>El Gouda</strong> — traído de Holanda a mediados del siglo XX — se volvió el queso por excelencia en Cuba y de ahí saltó a la pizza. Ninguna otra tradición pizzera en el mundo usa Gouda como queso principal. En el exilio, la mayoría mezcla Gouda con mozzarella: el Gouda pone el sabor cremoso y dulzón, la mozzarella estira. El queso va <strong>de borde a borde</strong>, cubriendo toda la pizza, para que los extremos se caramelicen y formen esa <em>corona de queso crujiente</em>. Cuando doblas la pizza, el queso tiene que <em>chorrear</em>. <em>Que el queso chorree al doblarla.</em> Eso no es negociable.</p>
+
+    <p class="hs-body"><strong>La salsa.</strong> Más dulce que cualquier marinara italiana. La famosa <strong>salsa Vita Nuova</strong> lleva azúcar prieta, comino, pimentón ahumado, cebolla, ajo y orégano — una base con sabor a sofrito que no tiene nada que ver con Italia. Las versiones caseras cuecen tomate con ají, azúcar prieta, ajo y hoja de laurel. El resultado es un equilibrio agridulce que al italiano le parecería de otro planeta.</p>
+
+    <p class="hs-body"><strong>Los ingredientes.</strong> Van <strong>debajo del queso</strong>, enterrados bajo esa capa espesa de Gouda — nunca encima. <strong>El jamón</strong> es el clásico, lo que le da categoría a la pizza sencilla de queso. <strong>El chorizo español molido</strong> es otro fijo — no en rodajas como el pepperoni, sino molido como picadillo. Otros ingredientes bien cubanos: piña (<em>pizza Hawaiana</em>, que tiene un séquito enorme), plátano, langosta, camarones y picadillo.</p>
+
+    <p class="hs-body"><strong>El horno.</strong> El <em>horno de leña</em> y el <em>horno de carbón</em> son los que dan ese calor concentrado que hace los bordes tostaditos como mandan los cánones. La crisis energética crónica de Cuba en realidad impulsó de vuelta el hornito de leña, que hoy es tanto una marca de autenticidad como una necesidad práctica.</p>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Pizza cubana</th>
+            <th>Napolitana</th>
+            <th>Nueva York</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Masa</td><td><strong>Gruesa, dulzona, esponjosa</strong></td><td>Finísima, con burbujas</td><td>Fina, ancha, plegable</td></tr>
+          <tr><td>Queso</td><td><strong>Gouda (+ mozzarella)</strong></td><td>Mozzarella de búfala fresca</td><td>Mozzarella de baja humedad</td></tr>
+          <tr><td>Cómo va el queso</td><td><strong>De borde a borde, ingredientes debajo</strong></td><td>Solo al centro, bordes visibles</td><td>Encima de la salsa</td></tr>
+          <tr><td>Salsa</td><td><strong>Dulce (azúcar prieta, comino, ají)</strong></td><td>Mínima, tomate San Marzano crudo</td><td>Cocida, con hierbas</td></tr>
+          <tr><td>Tamaño</td><td><strong>Personal (15–23 cm)</strong></td><td>Personal (25–30 cm)</td><td>Grande (+45 cm), por pedazo</td></tr>
+          <tr><td>Cómo se come</td><td><strong>Doblada por la mitad, a mordiscos, caminando</strong></td><td>Con tenedor y cuchillo o doblada</td><td>Doblada a lo largo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="five-rules">
+      <p class="five-rules-title">Las 5 Reglas de la Pizza Cubana Auténtica</p>
+      <div class="rule-item"><span class="rule-num">1</span><p class="rule-text">Masa gruesa, suave y esponjosa.</p></div>
+      <div class="rule-item"><span class="rule-num">2</span><p class="rule-text">Bordes tostados y crujientes.</p></div>
+      <div class="rule-item"><span class="rule-num">3</span><p class="rule-text">Que se pueda doblar y la masa no se parta — la verdadera prueba.</p></div>
+      <div class="rule-item"><span class="rule-num">4</span><p class="rule-text">Salsa con su toque dulce cubano.</p></div>
+      <div class="rule-item"><span class="rule-num">5</span><p class="rule-text">Que el queso chorree al doblarla. Siempre.</p></div>
+    </div>
+  </div>
+
+  <!-- Sección 4: Diáspora -->
+  <div class="hist-section r-up" id="diaspora">
+    <p class="hs-label">Parte IV</p>
+    <h2 class="hs-h2">De las ventanitas de La Habana a <em>Miami y más allá</em></h2>
+
+    <p class="hs-body">La historia de la pizza cubana en la diáspora es la historia del exilio. Las dos familias que fundaron la escena de la pizza cubana en Miami llegaron en el <strong>éxodo del Mariel de 1980</strong>. <strong>Manolo Montes de Oca</strong> había sido uno de los primeros pizzeros de Varadero. Se montó en una lancha de 27 pies con su familia, llegó a Miami y abrió una pizzería en la Calle 8 — el corazón cubano de la ciudad — que se convirtió en <strong>Montes de Oca: La Original Pizza Cubana</strong>, hoy con cinco locales. <strong>Ramón Rodríguez padre</strong> horneaba pizzas gruesas con chorizo molido y camarones en La Habana de antes de la Revolución. Después de preso por el régimen, llegó a Miami y abrió <strong>Rey's Pizza</strong> en 1985, hoy con nueve locales abiertos las 24 horas.</p>
+
+    <p class="hs-body">En Tampa, el pizzero <strong>Joan Trujillo</strong> — cuyo cafetín en el Marianao habanero fue destruido por agentes del gobierno en 2013 — se fue por México antes de llegar a Estados Unidos y montar su cadena. Él quiso recrear el ambiente a propósito: mesas de madera afuera, sin lujos. <strong>"Nos dimos cuenta de que lo que más extraña el cubano no es solo la comida — es el ambiente,"</strong> dijo. <em>"Queríamos que nuestros compatriotas se sentaran y se sintieran como en Cuba."</em></p>
+
+    <div class="hs-callout">
+      <p>"Lloré cuando fui a Houston y me comí una pizza cubana, un tamal y un batido de mamey."</p>
+      <cite>— Un exiliado cubano, publicado en internet</cite>
+    </div>
+
+    <p class="hs-body">La carga emocional de la pizza cubana en la diáspora es a otro nivel. Un TikTok de una cubana con una pizza doblada y el queso chorreando encendió una discusión enorme. Los comentarios llovieron: <em>bordes tostaditos</em> de la infancia, la pizzería frente a la escuela primaria, doblar pizzas en las calles de La Habana a medianoche. <strong>La pizza cubana es memoria comestible.</strong></p>
+
+    <p class="hs-body">En Puerto Vallarta hay restaurantes cubanos — el más conocido es <strong>Qué Bolá</strong> en la Zona Romántica — pero <strong>no hay ningún pizzero cubano de verdad</strong>. Ese hueco existe, y la comunidad de expatriados y los turistas con criterio que llenan la ciudad no tienen acceso a una <em>pizza cubana</em> auténtica hecha en <em>horno de leña</em>. Hasta ahora.</p>
+
+    <a href="index.html" class="back-top"><span class="es">← Volver al inicio</span></a>
+  </div>
+
+</div><!-- /content-wrap español -->
+</div><!-- /es -->
+
+<!-- ═══════════════════════════════════════════
+  ENGLISH VERSION — SECOND / SEGUNDO
+══════════════════════════════════════════ -->
+<div class="en">
+
+<!-- ENGLISH SECTION HEADER -->
+<div class="section-lang-header">
+  <span class="section-lang-badge"><span>🇺🇸</span> In English</span>
+</div>
+
+<div class="content-wrap">
+
+  <!-- Section 1: Italian roots -->
+  <div class="hist-section r-up">
+    <p class="hs-label">Part I</p>
+    <h2 class="hs-h2">How Italian recipes became Cuba's <em>most beloved street food</em></h2>
+
+    <p class="hs-body">Pizza arrived in Cuba through Italian immigrants — roughly <strong>1,200 Italians came to the island around 1930</strong>, many as engineers and architects building Catholic churches. They brought recipes that slowly merged with Cuban ingredients. By the 1940s, Havana's middle class was dining at Italian restaurants like <strong>Frascati</strong> (at Neptuno y Prado), <strong>Da Rosina</strong>, and <strong>Montecatini</strong> in the Vedado neighborhood. These weren't pizzerias per se, but they planted the seeds.</p>
+
+    <p class="hs-body">The real explosion came in the 1960s, after the Revolution. Pizza was cheap, fast, and easy to eat — perfect for a society under increasing rationing. A chain of state-run pizzerias (<em>pizzerías estatales</em>) spread to "the most remote corners" of the island. The iconic <strong>La Vita Nuova</strong> pizzeria in Havana opened in this era, becoming so legendary that its branded tomato sauce — <em>salsa Vita Nuova</em> — remains the gold standard for Cuban pizza sauce today. Another landmark, <strong>Cinecittà</strong>, opened on Calle 23 in Vedado, named after Italy's famous film studios.</p>
+
+    <div class="hs-quote">
+      <p>"The monument to the Revolution, if ever built, should be round."</p>
+      <cite>— Attributed to Gabriel García Márquez</cite>
+    </div>
+
+    <p class="hs-body">State pizzerias sold pizza, spaghetti, and lasagna each for <strong>1.20 pesos</strong> — pennies — and the endless lines outside became a defining image of daily life. Pizza, along with eggs and chickpeas, became the most relied-upon foods of the era. As Cubans say: pizza became <strong>"as Cuban as congrí"</strong> — the island's iconic rice-and-beans dish.</p>
+  </div>
+
+  <!-- Section 2: The Special Period -->
+  <div class="hist-section r-up">
+    <p class="hs-label">Part II</p>
+    <h2 class="hs-h2">The Special Period forged <em>Cuban pizza's true identity</em></h2>
+
+    <p class="hs-body">The <em>Período Especial</em> (Special Period) began in 1990 when the Soviet Union collapsed, taking with it <strong>80% of Cuba's trade</strong> and average annual subsidies of <strong>$4.3 billion</strong>. Cuba's food imports dropped by 75%. GDP shrank 35% in five years. The average Cuban lost <strong>10–20 pounds</strong>. They called it <em>"el tiempo de los flacos"</em> — the skinny times.</p>
+
+    <p class="hs-body">During this crisis, Cuban pizza crystallized into something unique in the world: <strong>the <em>pizzería a pie de calle</em></strong> — a street-side pizza window, usually just a slit in a family home's wall, where a rustic oven turned scarce ingredients into the cheapest possible meal. These <em>ventanitas de pizza</em> (tiny pizza windows) multiplied until there was scarcely a city block anywhere in Cuba without a "Pizzería" sign. No tables, no chairs, no formality. You ordered through a window, received your pizza on paper, <strong>folded it in half</strong>, and ate it walking down the street. That's the Cuban way: <em>"se dobla por la mitad y se le da mordiscos"</em> — you fold it in half and take bites.</p>
+
+    <div class="hs-callout">
+      <p>"In Cuba, pizza became essential during the Special Period because it was all there was."</p>
+      <cite>— Joan Trujillo, Cuban pizza maker</cite>
+    </div>
+
+    <p class="hs-body">Everything about Cuban pizza reflects creative survival. Cheese was scarce, so cooks used whatever they could find — often sourced <em>por la izquierda</em> ("on the left," Cuban slang for the black market). Flour was rationed, so dough was stretched with extra yeast and sugar to maximize volume. The sauce was sweetened with <em>azúcar moreno</em> (brown sugar), a Caribbean touch that made a little tomato go a long way.</p>
+  </div>
+
+  <!-- Section 3: What makes it unique -->
+  <div class="hist-section r-up" id="gouda-en">
+    <p class="hs-label">Part III</p>
+    <h2 class="hs-h2">What makes Cuban pizza <em>unlike any other pizza on earth</em></h2>
+
+    <p class="hs-body">Cuban pizza breaks nearly every rule of Italian pizza. Here are the defining characteristics:</p>
+
+    <p class="hs-body"><strong>The dough (<em>la masa</em>).</strong> Thick, soft, and spongy (<em>esponjosa</em>) — more like Cuban bread than Italian pizza crust. The recipe includes <strong>milk, sugar, salt, and oil</strong> alongside flour and extra yeast, producing a personal-sized round (roughly 17 cm) with a pillowy interior and <strong>crispy, slightly charred edges</strong> (<em>bordes tostaditos</em>). The dough must be foldable without cracking — <em>que se pueda doblar y la masa no se parta</em>. This is a non-negotiable test of quality.</p>
+
+    <p class="hs-body"><strong>The cheese (<em>el queso</em>).</strong> This is Cuban pizza's greatest departure from Italian tradition. <strong>Gouda</strong> — imported from Holland during the mid-20th century — became Cuba's dominant cheese and naturally migrated to pizza. No other pizza tradition in the world uses Gouda as its primary cheese. In the diaspora, most makers use a <strong>blend of Gouda and mozzarella</strong>, where Gouda provides the rich, sweet, creamy flavor and mozzarella adds stretch. The cheese is spread <strong>edge to edge</strong> across the entire surface, so the rims caramelize into a crispy burnt cheese crown (<em>corona de queso crujiente</em>). When you fold the pizza, the cheese must <em>chorrear</em> — ooze and drip. <em>Que el queso chorree al doblarla.</em></p>
+
+    <p class="hs-body"><strong>The sauce (<em>la salsa</em>).</strong> Sweeter than any Italian marinara. The iconic <strong>Vita Nuova sauce</strong> contains brown sugar, cumin, smoked paprika, onion, garlic, and oregano — a sofrito-influenced base that is distinctly Caribbean. Homemade versions simmer tomatoes with bell peppers (<em>ají</em>), brown sugar, garlic, and bay leaf. The result is a bright, sweet-savory balance entirely foreign to Italian cooking.</p>
+
+    <p class="hs-body"><strong>The toppings (<em>los ingredientes</em>).</strong> They go <strong>under the cheese</strong>, sealed in beneath that dense Gouda layer — never sprinkled on top. <strong>Ham (<em>jamón</em>)</strong> is the signature upgrade from a basic cheese pizza. <strong>Ground Spanish chorizo</strong> is the classic — not sliced like pepperoni, but ground to the consistency of taco meat. Other distinctly Cuban toppings include pineapple (<em>pizza Hawaiana</em>, enormously popular), plantains, lobster, shrimp, and <em>picadillo</em> (seasoned ground beef).</p>
+
+    <p class="hs-body"><strong>The oven (<em>el horno</em>).</strong> The <em>horno de leña</em> (wood-fired oven) and <em>horno de carbón</em> (charcoal oven) are the traditional heat sources, producing the concentrated high heat that creates those essential charred edges. Cuba's chronic energy crisis has actually driven a resurgence of wood-fired baking, making the <em>horno de leña</em> both an authenticity marker and a practical necessity.</p>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Cuban Pizza</th>
+            <th>Neapolitan</th>
+            <th>New York</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Crust</td><td><strong>Thick, sweet, spongy</strong></td><td>Paper-thin, blistered</td><td>Thin, wide, foldable</td></tr>
+          <tr><td>Cheese</td><td><strong>Gouda (+ mozzarella)</strong></td><td>Fresh buffalo mozzarella</td><td>Low-moisture mozzarella</td></tr>
+          <tr><td>Cheese placement</td><td><strong>Edge-to-edge, toppings underneath</strong></td><td>Center only, visible crust rim</td><td>On top of sauce</td></tr>
+          <tr><td>Sauce</td><td><strong>Sweet (brown sugar, cumin, peppers)</strong></td><td>Minimal, raw San Marzano</td><td>Cooked, herbed tomato</td></tr>
+          <tr><td>Size</td><td><strong>Personal (6–9 inches)</strong></td><td>Personal (10–12 inches)</td><td>Large (18+ inches), by the slice</td></tr>
+          <tr><td>Eating style</td><td><strong>Folded in half, by hand, walking</strong></td><td>Fork and knife or folded</td><td>Folded lengthwise</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="five-rules">
+      <p class="five-rules-title">The 5 Rules of Authentic Cuban Pizza</p>
+      <div class="rule-item"><span class="rule-num">1</span><p class="rule-text">Thick, soft, and spongy dough.</p></div>
+      <div class="rule-item"><span class="rule-num">2</span><p class="rule-text">Toasted, crispy edges.</p></div>
+      <div class="rule-item"><span class="rule-num">3</span><p class="rule-text">Must fold without cracking — the true test of quality.</p></div>
+      <div class="rule-item"><span class="rule-num">4</span><p class="rule-text">Sauce with its distinctive Cuban sweetness.</p></div>
+      <div class="rule-item"><span class="rule-num">5</span><p class="rule-text">The cheese must drip when you fold it. Always.</p></div>
+    </div>
+  </div>
+
+  <!-- Section 4: Diaspora -->
+  <div class="hist-section r-up" id="diaspora-en">
+    <p class="hs-label">Part IV</p>
+    <h2 class="hs-h2">From Havana's ventanitas to <em>Miami and beyond</em></h2>
+
+    <p class="hs-body">Cuban pizza's diaspora story is an exile story. The two founding families of Miami's Cuban pizza scene both arrived during the <strong>1980 Mariel boatlift</strong>. <strong>Manolo Montes de Oca</strong> had been one of the first pizza makers in Varadero, Cuba's beach town. He loaded his family onto a 27-foot boat, eventually opening a pizzeria on Calle 8 — Miami's Cuban heartbeat — that became <strong>Montes de Oca: La Original Pizza Cubana</strong>, now five locations. <strong>Ramón Rodriguez Sr.</strong> had baked inch-thick pies with ground chorizo and shrimp in pre-Revolution Havana. After imprisonment by the Castro regime, he reached Miami and opened <strong>Rey's Pizza</strong> in 1985, now nine 24-hour locations across the city.</p>
+
+    <p class="hs-body">In Tampa, Cuban pizzero <strong>Joan Trujillo</strong> — whose café in Havana's Marianao neighborhood was destroyed by government agents in 2013 — fled through Mexico before reaching the United States and opening a chain. He deliberately recreated the atmosphere: wooden tables outdoors, no luxuries. <strong>"We realized that what Cubans miss most isn't just the food — it's the atmosphere,"</strong> he said. <em>"Queríamos que nuestros compatriotas se sentaran y se sintieran como en Cuba."</em></p>
+
+    <div class="hs-callout">
+      <p>"I cried when I went to Houston and had a Cuban pizza, a tamale, and a mamey shake."</p>
+      <cite>— A Cuban exile, posted online</cite>
+    </div>
+
+    <p class="hs-body">The emotional weight of Cuban pizza in the diaspora is profound. A Cuban TikToker's video of folded, cheese-dripping pizza sparked waves of nostalgic debate. Comments flooded in about <em>bordes tostaditos</em> from childhood, about the pizzería outside their elementary school, about folding slices on Havana's streets at midnight. <strong>Cuban pizza is edible memory.</strong></p>
+
+    <p class="hs-body">Puerto Vallarta currently has Cuban restaurants — notably <strong>Qué Bolá</strong> in Zona Romántica — but <strong>no dedicated Cuban pizza maker</strong>. This gap exists, and the city's large expat community and food-savvy tourist population have no access to authentic <em>pizza cubana</em> made in a <em>horno de leña</em>. Until now.</p>
+
+    <a href="index.html" class="back-top"><span class="en">← Back to home</span></a>
+  </div>
+
+</div><!-- /content-wrap english -->
+</div><!-- /en -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="fbrand">🔥 La Pizza Cubana</p>
+      <p class="ftagline"><span class="es">Auténtica pizza cubana hecha a mano en horno de leña. Puerto Vallarta, México. Tan cubana como el congrí.</span><span class="en">Authentic Cuban pizza handmade in a wood-fired oven. Puerto Vallarta, Mexico. As Cuban as congrí.</span></p>
+    </div>
+    <div>
+      <p class="fcol-title"><span class="es">Menú</span><span class="en">Menu</span></p>
+      <ul class="flinks">
+        <li><a href="index.html#menu"><span class="es">La Clásica</span><span class="en">The Classic</span></a></li>
+        <li><a href="index.html#menu"><span class="es">La de Jamón</span><span class="en">The Ham</span></a></li>
+        <li><a href="index.html#menu"><span class="es">La de Chorizo</span><span class="en">The Chorizo</span></a></li>
+        <li><a href="index.html#menu"><span class="es">La Mixta</span><span class="en">The Works</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fcol-title"><span class="es">El Lugar</span><span class="en">The Place</span></p>
+      <ul class="flinks">
+        <li><a href="la-historia.html"><span class="es">La Historia</span><span class="en">The History</span></a></li>
+        <li><a href="index.html#chef"><span class="es">Conoce a Ray</span><span class="en">Meet Ray</span></a></li>
+        <li><a href="index.html#blog"><span class="es">Blog</span><span class="en">Blog</span></a></li>
+        <li><a href="index.html#contacto"><span class="es">Ordenar / Contacto</span><span class="en">Order / Contact</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <p class="fcopy">© 2026 La Pizza Cubana · Puerto Vallarta, México · Todos los derechos reservados</p>
+    <p class="fpv">Puerto Vallarta 🌊🔥</p>
+  </div>
+</footer>
+
+<script>
+// CURSOR (desktop only)
+const cur=document.getElementById('cur'),cr=document.getElementById('cr');
+if(cur&&cr){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();}
+
+// MOBILE NAV
+function openMobileNav(){document.getElementById('mobileNav').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobileNav(){document.getElementById('mobileNav').classList.remove('open');document.body.style.overflow='';}
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.08});
+document.querySelectorAll('.r-up').forEach(el=>obs.observe(el));
+
+// STICKY NAV
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('stuck',window.scrollY>80);});
+
+// LANGUAGE TOGGLE
+let en=false;
+function tl(){en=!en;applyLang(en?'en':'es');}
+function setLang(code){en=(code==='en');applyLang(code);}
+function applyLang(code){
+  document.body.className=code==='en'?'lang-en':'lang-es';
+  document.getElementById('ll').textContent=code==='en'?'Español':'English';
+  document.documentElement.lang=code;
+}
+</script>
+</body>
+</html>

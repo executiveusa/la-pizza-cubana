@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Pizza Cubana – Auténtica · Puerto Vallarta</title>
+<meta name="description" content="Auténtica pizza cubana hecha a mano en horno de leña. La Pizza Cubana, Puerto Vallarta, México.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@300;400;500;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F5EDD8;--cream-dark:#EAD9B8;--paprika:#C0392B;--paprika-dark:#922B21;--charcoal:#1A1209;--tobacco:#2C1A0E;--ochre:#C97A2A;--ochre-light:#E8A84C;--ash:#7A6550;--warm-white:#FDF8F0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--charcoal);font-family:'Libre Baskerville',Georgia,serif;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cur{width:12px;height:12px;border-radius:50%;background:var(--paprika);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;mix-blend-mode:multiply;}
+.cur-ring{width:40px;height:40px;border:1.5px solid var(--paprika);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .28s cubic-bezier(.25,.46,.45,.94);opacity:.45;}
+
+/* LANG BAR */
+.lang-bar{position:fixed;top:0;left:0;right:0;z-index:700;display:flex;justify-content:flex-end;padding:12px 44px;background:linear-gradient(to bottom,rgba(20,12,4,.9),transparent);}
+.lang-btn{display:flex;align-items:center;gap:8px;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cream-dark);background:none;border:1px solid rgba(245,237,216,.22);padding:7px 16px;cursor:pointer;transition:all .3s;}
+.lang-btn:hover{border-color:var(--ochre-light);color:var(--ochre-light);}
+.ldot{width:5px;height:5px;border-radius:50%;background:var(--ochre);}
+
+/* NAV */
+nav{position:fixed;top:42px;left:0;right:0;z-index:600;display:flex;justify-content:space-between;align-items:center;padding:14px 44px;transition:all .4s;}
+nav.stuck{background:rgba(20,12,4,.97);backdrop-filter:blur(10px);top:0;box-shadow:0 2px 30px rgba(0,0,0,.4);}
+.nlogo{font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--cream);text-decoration:none;}
+.nlinks{display:flex;gap:28px;list-style:none;}
+.nlinks a{font-family:'Oswald',sans-serif;font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(245,237,216,.6);text-decoration:none;transition:color .3s;}
+.nlinks a:hover,.nlinks a.active{color:var(--ochre-light);}
+.ncta{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--charcoal);background:var(--ochre-light);padding:10px 20px;text-decoration:none;box-shadow:0 4px 16px rgba(232,168,76,.45),0 2px 6px rgba(0,0,0,.3);transition:all .3s;}
+.ncta:hover{background:var(--cream);box-shadow:0 8px 28px rgba(232,168,76,.5),0 4px 10px rgba(0,0,0,.3);}
+
+/* MOBILE NAV TOGGLE */
+.nav-toggle{display:none;background:none;border:1px solid rgba(245,237,216,.3);color:var(--cream);padding:8px 12px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:18px;line-height:1;}
+.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,12,4,.98);z-index:590;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{font-family:'Oswald',sans-serif;font-size:18px;font-weight:400;letter-spacing:5px;text-transform:uppercase;color:rgba(245,237,216,.7);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(245,237,216,.07);width:220px;text-align:center;transition:color .3s;}
+.mobile-nav a:hover{color:var(--ochre-light);}
+.mobile-nav-close{position:absolute;top:22px;right:24px;background:none;border:none;color:rgba(245,237,216,.5);font-size:28px;cursor:pointer;}
+
+/* BUTTONS */
+.btn-fire{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--charcoal);background:var(--ochre-light);padding:17px 42px;text-decoration:none;position:relative;overflow:hidden;box-shadow:0 6px 22px rgba(232,168,76,.5),0 3px 8px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15);transition:color .3s,box-shadow .3s,transform .15s;}
+.btn-fire::before{content:'';position:absolute;inset:0;background:var(--paprika);transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.6,0,.4,1);}
+.btn-fire:hover{color:var(--cream);box-shadow:0 10px 32px rgba(192,57,43,.55),0 4px 12px rgba(0,0,0,.4);}
+.btn-fire:hover::before{transform:scaleY(1);}
+.btn-fire:active{transform:translateY(1px);}
+.btn-fire>span{position:relative;z-index:1;}
+.btn-ghost{font-family:'Oswald',sans-serif;font-size:12px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--cream-dark);border:1px solid rgba(245,237,216,.32);padding:17px 42px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.25);transition:all .3s;}
+.btn-ghost:hover{border-color:var(--cream);color:var(--cream);background:rgba(245,237,216,.07);box-shadow:0 8px 24px rgba(0,0,0,.35);}
+.btn-white{font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--paprika-dark);background:var(--cream);padding:17px 42px;text-decoration:none;box-shadow:0 6px 22px rgba(0,0,0,.3),0 2px 8px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.6);transition:all .3s;}
+.btn-white:hover{background:var(--ochre-light);color:var(--charcoal);box-shadow:0 10px 30px rgba(232,168,76,.45),0 4px 12px rgba(0,0,0,.3);}
+
+/* SCROLL ANIMATIONS */
+.r-up{opacity:0;transform:translateY(50px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
+.r-left{opacity:0;transform:translateX(-65px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
+.r-right{opacity:0;transform:translateX(65px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
+.r-scale{opacity:0;transform:scale(.93);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
+.r-up.on,.r-left.on,.r-right.on,.r-scale.on{opacity:1;transform:none;}
+.d1{transition-delay:.12s;}.d2{transition-delay:.24s;}.d3{transition-delay:.36s;}.d4{transition-delay:.48s;}
+@keyframes fu{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══ HERO ═══ */
+.hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 45%;filter:brightness(.48) saturate(1.15) contrast(1.05);}
+.hero-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(20,12,4,.97) 0%,rgba(20,12,4,.55) 35%,rgba(20,12,4,.12) 65%,rgba(20,12,4,.35) 100%),linear-gradient(to right,rgba(20,12,4,.6) 0%,transparent 55%);}
+.hero-glow{position:absolute;bottom:15%;left:45%;transform:translateX(-50%);width:650px;height:380px;z-index:1;background:radial-gradient(ellipse,rgba(192,57,43,.16) 0%,transparent 70%);animation:gb 4s ease-in-out infinite alternate;pointer-events:none;}
+@keyframes gb{0%{opacity:.4;transform:translateX(-50%) scale(1);}100%{opacity:1;transform:translateX(-50%) scale(1.1);}}
+.ember{position:absolute;border-radius:50%;background:var(--ochre);opacity:0;animation:er 7s ease-in infinite;pointer-events:none;z-index:2;}
+@keyframes er{0%{opacity:0;transform:translateY(0) translateX(0) scale(1);}15%{opacity:.8;}85%{opacity:.2;}100%{opacity:0;transform:translateY(-280px) translateX(35px) scale(.2);}}
+.hero-content{position:relative;z-index:3;padding:0 80px 84px;max-width:860px;}
+.h-pre{font-family:'Caveat',cursive;font-size:22px;font-weight:600;color:var(--ochre-light);margin-bottom:10px;opacity:0;animation:fu .8s .1s forwards;}
+.h-eyebrow{font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:rgba(245,237,216,.55);margin-bottom:20px;display:flex;align-items:center;gap:14px;opacity:0;animation:fu .8s .25s forwards;}
+.h-eyebrow-line{width:42px;height:1px;background:var(--ochre);}
+.h1{font-family:'Playfair Display',serif;font-size:clamp(58px,9vw,116px);font-weight:900;line-height:.93;color:var(--cream);margin-bottom:8px;opacity:0;animation:fu .9s .4s forwards;}
+.h1 em{font-style:italic;color:var(--ochre-light);display:block;}
+.h-sub{font-family:'Oswald',sans-serif;font-size:clamp(12px,1.6vw,16px);font-weight:300;letter-spacing:7px;text-transform:uppercase;color:rgba(245,237,216,.5);margin-bottom:28px;opacity:0;animation:fu .8s .55s forwards;}
+.h-desc{font-size:17px;line-height:1.8;color:rgba(245,237,216,.82);max-width:510px;margin-bottom:40px;opacity:0;animation:fu .8s .7s forwards;}
+.h-desc strong{color:var(--cream);}
+.h-ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fu .8s .85s forwards;}
+.h-scroll{position:absolute;bottom:34px;right:56px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;opacity:0;animation:fu .8s 1.2s forwards;}
+.h-scroll-lbl{font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(245,237,216,.35);}
+.scroll-bar{width:1px;height:48px;background:linear-gradient(to bottom,rgba(245,237,216,.38),transparent);animation:sp 2s ease-in-out infinite;}
+@keyframes sp{0%,100%{opacity:.4;transform:scaleY(1);}50%{opacity:1;transform:scaleY(.55);}}
+
+/* ═══ SHARED SECTION STYLES ═══ */
+.si{max-width:1200px;margin:0 auto;padding:0 60px;}
+.slabel{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--paprika);margin-bottom:16px;display:flex;align-items:center;gap:13px;}
+.slabel::before{content:'';width:26px;height:1px;background:var(--paprika);}
+.slabel-lt{color:var(--ochre-light);}.slabel-lt::before{background:var(--ochre-light);}
+
+/* ═══ STORY ═══ */
+.story{background:var(--warm-white);padding:130px 0;position:relative;overflow:hidden;}
+.story::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 5% 5%,rgba(201,122,42,.07) 0%,transparent 45%);}
+.story-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:96px;align-items:start;}
+.sh2{font-family:'Playfair Display',serif;font-size:clamp(34px,4vw,56px);font-weight:900;line-height:1.07;margin-bottom:28px;color:var(--charcoal);}
+.sh2 em{font-style:italic;color:var(--paprika);}
+.sbody{font-size:15px;line-height:1.88;color:#4a3522;margin-bottom:20px;}
+.sbody strong{color:var(--charcoal);}
+.squote{border-left:3px solid var(--ochre);padding:17px 24px;margin:28px 0;background:rgba(201,122,42,.06);}
+.squote p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.5;color:var(--charcoal);margin-bottom:7px;}
+.squote cite{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);}
+.shand{font-family:'Caveat',cursive;font-size:28px;font-weight:700;color:var(--ochre);transform:rotate(-2deg);display:inline-block;margin-top:12px;}
+.story-right{position:relative;}
+.sticky-box{position:sticky;top:96px;}
+.cinco{background:var(--tobacco);padding:42px 36px;position:relative;overflow:hidden;}
+.cinco::before{content:'5';font-family:'Playfair Display',serif;font-size:190px;font-weight:900;color:rgba(201,122,42,.07);position:absolute;top:-35px;right:-8px;line-height:1;pointer-events:none;}
+.cinco-title{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ochre-light);margin-bottom:24px;}
+.ri{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid rgba(245,237,216,.07);}
+.ri:last-child{border:none;}
+.rn{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--paprika);line-height:1;flex-shrink:0;min-width:30px;}
+.rt{font-family:'Libre Baskerville',serif;font-style:italic;font-size:13px;line-height:1.6;color:var(--cream-dark);padding-top:5px;}
+.historia-cta{margin-top:32px;display:flex;justify-content:flex-start;}
+
+/* ═══ MENU ═══ */
+.menu{background:var(--charcoal);padding:130px 0;position:relative;overflow:hidden;}
+.menu::before{content:'MENÚ';font-family:'Oswald',sans-serif;font-size:250px;font-weight:700;color:rgba(245,237,216,.017);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;letter-spacing:18px;pointer-events:none;}
+.mhead{text-align:center;margin-bottom:68px;}
+.mh2{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,64px);font-weight:900;line-height:1;color:var(--cream);}
+.mh2 em{font-style:italic;color:var(--paprika);}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.mcard{background:rgba(245,237,216,.037);padding:36px 28px;position:relative;overflow:hidden;cursor:pointer;transition:background .35s,transform .3s;border:1px solid rgba(245,237,216,.042);}
+.mcard:hover{background:rgba(201,122,42,.13);transform:translateY(-5px);}
+.mnum{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:rgba(245,237,216,.033);line-height:1;position:absolute;top:10px;right:10px;transition:color .35s;}
+.mcard:hover .mnum{color:rgba(201,122,42,.22);}
+.memi{font-size:32px;margin-bottom:12px;display:block;}
+.mtitle{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--cream);margin-bottom:7px;}
+.msub{font-family:'Oswald',sans-serif;font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--ochre);margin-bottom:11px;}
+.mdesc{font-size:13px;line-height:1.72;color:rgba(245,237,216,.56);}
+
+/* ═══ CRAFT ═══ */
+.craft{background:var(--cream);padding:130px 0;}
+.craft-head{display:grid;grid-template-columns:1fr 1fr;gap:76px;margin-bottom:68px;align-items:end;}
+.ch2{font-family:'Playfair Display',serif;font-size:clamp(36px,4.5vw,62px);font-weight:900;line-height:1.05;color:var(--charcoal);}
+.ch2 em{font-style:italic;color:var(--paprika);}
+.cintro{font-size:15px;line-height:1.82;color:#5a4030;padding-top:6px;}
+.csteps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.cstep{padding:34px 24px;border-right:1px solid rgba(44,26,14,.1);position:relative;}
+.cstep:last-child{border:none;}
+.cstep:hover .sicon{transform:scale(1.18) rotate(6deg);}
+.sicon{font-size:36px;margin-bottom:16px;display:block;transition:transform .35s;}
+.snum{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--paprika);margin-bottom:9px;}
+.stitle{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--charcoal);margin-bottom:7px;}
+.sdesc{font-size:13px;line-height:1.72;color:var(--ash);}
+
+/* ═══ CHEF ═══ */
+.chef{background:var(--tobacco);padding:130px 0;position:relative;overflow:hidden;}
+.chef::before{content:'RAY';font-family:'Playfair Display',serif;font-size:310px;font-weight:900;color:rgba(201,122,42,.04);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;line-height:1;}
+.chef-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:88px;align-items:center;}
+.chef-photo-wrap{position:relative;}
+.photo-frame{width:100%;padding-top:118%;position:relative;overflow:hidden;background:linear-gradient(160deg,#3d2010 0%,#1a0d05 100%);box-shadow:0 28px 76px rgba(0,0,0,.65),0 0 0 1px rgba(201,122,42,.14);}
+.photo-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:sepia(.18) contrast(1.06);}
+.photo-frame::before{content:'';position:absolute;top:14px;left:14px;width:36px;height:36px;border-top:2px solid var(--ochre);border-left:2px solid var(--ochre);z-index:2;}
+.photo-frame::after{content:'';position:absolute;bottom:14px;right:14px;width:36px;height:36px;border-bottom:2px solid var(--ochre);border-right:2px solid var(--ochre);z-index:2;}
+.chef-badge{position:absolute;bottom:-18px;right:-18px;width:95px;height:95px;background:var(--paprika);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;box-shadow:0 8px 22px rgba(192,57,43,.55);}
+.cbadge-top{font-family:'Oswald',sans-serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,237,216,.65);}
+.cbadge-name{font-family:'Caveat',cursive;font-size:22px;font-weight:700;color:var(--cream);line-height:1;}
+.chef-h2{font-family:'Playfair Display',serif;font-size:clamp(34px,4vw,56px);font-weight:900;line-height:1.06;color:var(--cream);margin-bottom:5px;}
+.chef-h2 em{font-style:italic;color:var(--ochre-light);}
+.chef-sub{font-family:'Oswald',sans-serif;font-size:11px;font-weight:300;letter-spacing:5px;text-transform:uppercase;color:rgba(245,237,216,.4);margin-bottom:28px;}
+.chef-bio{font-size:15px;line-height:1.88;color:rgba(245,237,216,.72);margin-bottom:18px;}
+.chef-bio strong{color:var(--cream);}
+.chef-sig{font-family:'Caveat',cursive;font-size:36px;font-weight:700;color:var(--ochre-light);transform:rotate(-2deg);display:inline-block;margin-top:6px;}
+.chef-facts{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:32px;}
+.cfact{background:rgba(245,237,216,.042);padding:18px 16px;border:1px solid rgba(245,237,216,.055);}
+.cfact-icon{font-size:28px;margin-bottom:4px;display:block;}
+.cfact-lbl{font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,237,216,.4);line-height:1.5;}
+
+/* ═══ BLOG ═══ */
+.blog{background:var(--warm-white);padding:130px 0;}
+.blog-head{margin-bottom:56px;}
+.blog-h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;line-height:1.1;color:var(--charcoal);margin-bottom:12px;}
+.blog-h2 em{font-style:italic;color:var(--paprika);}
+.blog-sub{font-size:15px;color:var(--ash);max-width:420px;}
+.blog-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:2px;}
+.blog-main{background:var(--tobacco);padding:50px 44px;cursor:pointer;transition:transform .3s;text-decoration:none;display:block;}
+.blog-main:hover{transform:translateY(-4px);}
+.blog-main:hover .blog-more{gap:18px;}
+.btag{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--ochre);margin-bottom:16px;}
+.blog-card-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;line-height:1.14;color:var(--cream);margin-bottom:12px;}
+.blog-card-body{font-size:13px;line-height:1.82;color:rgba(245,237,216,.63);margin-bottom:24px;}
+.blog-more{font-family:'Oswald',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--ochre-light);text-decoration:none;display:flex;align-items:center;gap:7px;transition:gap .3s;}
+.blog-right{display:flex;flex-direction:column;gap:2px;}
+.blog-sm{background:var(--cream-dark);padding:28px 26px;flex:1;cursor:pointer;transition:background .3s,transform .3s;text-decoration:none;display:block;}
+.blog-sm:hover{background:#dece9e;transform:translateX(4px);}
+.blog-sm .blog-card-title{font-size:16px;color:var(--charcoal);margin-bottom:7px;}
+.blog-sm .blog-card-body{color:#6a5040;font-size:12px;margin-bottom:12px;}
+.blog-sm .blog-more{color:var(--paprika);}
+
+/* ═══ CTA ═══ */
+.cta{background:var(--paprika-dark);padding:130px 0;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 100%,rgba(201,122,42,.26) 0%,transparent 50%),radial-gradient(ellipse at 100% 0%,rgba(0,0,0,.24) 0%,transparent 50%);}
+.cta-inner{max-width:760px;margin:0 auto;padding:0 60px;text-align:center;position:relative;z-index:1;}
+.cta-h2{font-family:'Playfair Display',serif;font-size:clamp(38px,5.5vw,70px);font-weight:900;line-height:1.03;color:var(--cream);margin-bottom:20px;}
+.cta-h2 em{font-style:italic;color:var(--ochre-light);}
+.cta-body{font-size:15px;line-height:1.8;color:rgba(245,237,216,.76);margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.cta-loc{font-family:'Caveat',cursive;font-size:20px;color:rgba(245,237,216,.5);}
+.cta-loc strong{color:var(--ochre-light);}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--charcoal);padding:60px 60px 38px;}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:56px;margin-bottom:44px;}
+.fbrand{font-family:'Oswald',sans-serif;font-size:20px;font-weight:700;letter-spacing:4px;color:var(--ochre-light);margin-bottom:11px;}
+.ftagline{font-size:12px;line-height:1.75;color:rgba(245,237,216,.42);max-width:250px;}
+.fcol-title{font-family:'Oswald',sans-serif;font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ochre);margin-bottom:16px;}
+.flinks{list-style:none;}.flinks li{margin-bottom:8px;}
+.flinks a{font-size:12px;color:rgba(245,237,216,.42);text-decoration:none;transition:color .3s;}
+.flinks a:hover{color:var(--cream);}
+.footer-bot{max-width:1200px;margin:0 auto;border-top:1px solid rgba(245,237,216,.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;}
+.fcopy{font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:2px;color:rgba(245,237,216,.22);}
+.fpv{font-family:'Caveat',cursive;font-size:14px;color:var(--ochre);}
+
+/* MOBILE */
+@media(max-width:920px){
+  body{cursor:auto;}
+  .cur,.cur-ring{display:none;}
+  nav{padding:12px 20px;}
+  .nlinks,.ncta{display:none;}
+  .nav-toggle{display:block;}
+  .hero-content{padding:0 22px 56px;}
+  .h-scroll{display:none;}
+  .si{padding:0 20px;}
+  .story-grid,.craft-head,.chef-inner,.blog-grid{grid-template-columns:1fr;gap:40px;}
+  .mgrid,.csteps{grid-template-columns:1fr 1fr;}
+  .chef-facts{grid-template-columns:1fr 1fr;}
+  .story,.menu,.craft,.chef,.blog,.cta{padding:80px 0;}
+  .cta-inner{padding:0 20px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+  footer{padding:44px 20px 30px;}
+  .blog-right{flex-direction:column;}
+  .chef-photo-wrap{max-width:300px;margin:0 auto;}
+  .lang-bar{padding:10px 18px;}
+  .mgrid{grid-template-columns:1fr;}
+  .csteps{grid-template-columns:1fr 1fr;}
+  .cstep{border-right:none;border-bottom:1px solid rgba(44,26,14,.1);}
+  .cstep:last-child{border:none;}
+}
+
+@media(max-width:480px){
+  .mgrid,.csteps{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .chef-facts{grid-template-columns:1fr 1fr;}
+  .h1{font-size:48px;}
+}
+
+/* LANGUAGE */
+.lang-es .en{display:none;}
+.lang-en .es{display:none;}
+</style>
+</head>
+<body class="lang-es">
+
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="cr"></div>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Cerrar menú">✕</button>
+  <a href="#historia" onclick="closeMobileNav()"><span class="es">Historia</span><span class="en">Story</span></a>
+  <a href="#menu" onclick="closeMobileNav()"><span class="es">Menú</span><span class="en">Menu</span></a>
+  <a href="#chef" onclick="closeMobileNav()"><span class="es">El Chef</span><span class="en">The Chef</span></a>
+  <a href="la-historia.html"><span class="es">La Historia</span><span class="en">The History</span></a>
+  <a href="#blog" onclick="closeMobileNav()"><span class="es">Blog</span><span class="en">Blog</span></a>
+  <a href="#contacto" onclick="closeMobileNav()"><span class="es">Contacto</span><span class="en">Contact</span></a>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn" onclick="tl()" aria-label="Cambiar idioma">
+    <span class="ldot"></span>
+    <span id="ll">English</span>
+  </button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" class="nlogo">🔥 La Pizza Cubana</a>
+  <ul class="nlinks">
+    <li><a href="#historia"><span class="es">Historia</span><span class="en">Story</span></a></li>
+    <li><a href="#menu"><span class="es">Menú</span><span class="en">Menu</span></a></li>
+    <li><a href="#chef"><span class="es">El Chef</span><span class="en">The Chef</span></a></li>
+    <li><a href="la-historia.html"><span class="es">La Historia</span><span class="en">The History</span></a></li>
+    <li><a href="#blog"><span class="es">Blog</span><span class="en">Blog</span></a></li>
+    <li><a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="nav-toggle" onclick="openMobileNav()" aria-label="Abrir menú">☰</button>
+    <a href="#contacto" class="ncta"><span class="es">Ordenar Ahora</span><span class="en">Order Now</span></a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1800&auto=format&fit=crop&q=80" alt="Calle cubana auténtica – La Pizza Cubana" loading="eager"/>
+  </div>
+  <div class="hero-ov"></div>
+  <div class="hero-glow"></div>
+  <div class="ember" style="width:4px;height:4px;left:44%;bottom:32%;animation-delay:0s;animation-duration:6s;"></div>
+  <div class="ember" style="width:3px;height:3px;left:48%;bottom:27%;animation-delay:1.5s;animation-duration:7s;"></div>
+  <div class="ember" style="width:5px;height:5px;left:52%;bottom:38%;animation-delay:2.2s;animation-duration:5.5s;"></div>
+  <div class="ember" style="width:3px;height:3px;left:40%;bottom:29%;animation-delay:3.4s;animation-duration:6.5s;"></div>
+
+  <div class="hero-content">
+    <p class="h-pre"><span class="es">Bienvenido a...</span><span class="en">Welcome to...</span></p>
+    <p class="h-eyebrow"><span class="h-eyebrow-line"></span><span class="es">Puerto Vallarta, México – Tradición de La Habana, Cuba</span><span class="en">Puerto Vallarta, Mexico – Tradition from Havana, Cuba</span></p>
+    <h1 class="h1"><em>El Horno</em><span class="es">de Ray.</span><span class="en">de Ray.</span></h1>
+    <p class="h-sub"><span class="es">Auténtica Pizza Cubana · Horno de Leña · Hecha a Mano</span><span class="en">Authentic Cuban Pizza · Wood-Fired Oven · Handmade</span></p>
+    <p class="h-desc"><span class="es"><strong>La misma pizza que alimentó a Cuba.</strong> Masa esponjosa, queso Gouda que chorrea, jamón hecho en casa — todo cocido en horno de leña bajo el cielo de Vallarta.</span><span class="en"><strong>The same pizza that fed a nation.</strong> Spongy hand-made dough, dripping Gouda cheese, house-cured ham — fired in a wood-burning oven under the Vallarta sky.</span></p>
+    <div class="h-ctas">
+      <a href="#menu" class="btn-fire"><span>🍕 <span class="es">Ver el Menú</span><span class="en">See the Menu</span></span></a>
+      <a href="#historia" class="btn-ghost"><span class="es">Nuestra Historia</span><span class="en">Our Story</span></a>
+    </div>
+  </div>
+  <div class="h-scroll">
+    <span class="h-scroll-lbl"><span class="es">Descubrir</span><span class="en">Discover</span></span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- ═══ STORY ═══ -->
+<section class="story" id="historia">
+  <div class="si">
+    <div class="story-grid">
+      <div>
+        <p class="slabel r-left"><span class="es">La Historia</span><span class="en">The History</span></p>
+        <h2 class="sh2 r-left d1"><span class="es">Tan cubana<br>como el <em>congrí.</em></span><span class="en">As Cuban<br>as <em>congrí.</em></span></h2>
+        <p class="sbody r-up d1"><span class="es">Todo comenzó con inmigrantes italianos que llegaron a Cuba en los años 30. Trajeron sus recetas, pero Cuba los transformó. El queso Gouda reemplazó a la mozzarella. La salsa ganó azúcar moreno y comino. La masa creció — gruesa, esponjosa, imposible de olvidar.</span><span class="en">It all started with Italian immigrants who arrived in Cuba in the 1930s. They brought their recipes, but Cuba transformed them. Gouda replaced mozzarella. The sauce gained brown sugar and cumin. The crust grew thick, spongy, impossible to forget.</span></p>
+        <p class="sbody r-up d2"><span class="es">Durante el <strong>Período Especial</strong> de los años 90, cuando Cuba perdió el 80% de su comercio exterior de golpe, la pizza cubana se convirtió en alimento de supervivencia. Las <em>ventanitas de pizza</em> aparecieron en cada cuadra. Se doblaba por la mitad y se comía caminando.</span><span class="en">During the <strong>Special Period</strong> of the 1990s, when Cuba lost 80% of its trade overnight, Cuban pizza became survival food. The <em>ventanitas de pizza</em> appeared on every block. You folded it in half and ate it walking down the street.</span></p>
+        <div class="squote r-up">
+          <p><span class="es">"El monumento a la Revolución, de hacerse, debía ser redondo."</span><span class="en">"The monument to the Revolution, if ever built, should be round."</span></p>
+          <cite>— <span class="es">Atribuido a Gabriel García Márquez</span><span class="en">Attributed to Gabriel García Márquez</span></cite>
+        </div>
+        <p class="sbody r-up d2"><span class="es">Hoy Ray trae esa misma tradición a Puerto Vallarta. <strong>Horno de leña al aire libre</strong>, masa amasada a mano cada mañana, salsa dulce de tomate, queso Gouda que chorrea al doblarla, y <strong>jamón curado en casa</strong>. Nada comercial. Nada de atajos.</span><span class="en">Today Ray brings that same tradition to Puerto Vallarta. <strong>Outdoor wood-fired oven</strong>, dough kneaded by hand each morning, sweet tomato sauce, Gouda that drips when you fold it, and <strong>house-cured ham</strong>. Nothing commercial. No shortcuts.</span></p>
+        <span class="shand r-up"><span class="es">¡Hecha con amor! 🔥</span><span class="en">Made with love! 🔥</span></span>
+        <div class="historia-cta r-up d3">
+          <a href="la-historia.html" class="btn-fire" style="display:inline-block;margin-top:24px;font-size:11px;padding:14px 32px;"><span><span class="es">📖 Leer la Historia Completa</span><span class="en">📖 Read the Full History</span></span></a>
+        </div>
+      </div>
+      <div class="story-right">
+        <div class="sticky-box">
+          <div class="cinco r-right">
+            <p class="cinco-title"><span class="es">Las 5 Reglas de la Pizza Cubana Auténtica</span><span class="en">The 5 Rules of Authentic Cuban Pizza</span></p>
+            <div class="ri"><span class="rn">1</span><p class="rt"><span class="es">Masa gruesa, suave y esponjosa.</span><span class="en">Thick, soft, and spongy dough.</span></p></div>
+            <div class="ri"><span class="rn">2</span><p class="rt"><span class="es">Bordes tostados y crujientes.</span><span class="en">Toasted, crispy edges.</span></p></div>
+            <div class="ri"><span class="rn">3</span><p class="rt"><span class="es">Que se pueda doblar y la masa no se parta.</span><span class="en">Must fold without cracking — the true test.</span></p></div>
+            <div class="ri"><span class="rn">4</span><p class="rt"><span class="es">Salsa con su toque dulce cubano.</span><span class="en">Sauce with its distinctive Cuban sweetness.</span></p></div>
+            <div class="ri"><span class="rn">5</span><p class="rt"><span class="es">Que el queso chorree al doblarla. Siempre.</span><span class="en">The cheese must drip when you fold it. Always.</span></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MENU ═══ -->
+<section class="menu" id="menu">
+  <div class="si">
+    <div class="mhead r-up">
+      <p class="slabel slabel-lt" style="justify-content:center;"><span class="es">Lo Que Hacemos</span><span class="en">What We Make</span></p>
+      <h2 class="mh2"><span class="es">Nuestras <em>Pizzas</em></span><span class="en">Our <em>Pizzas</em></span></h2>
+    </div>
+    <div class="mgrid">
+      <div class="mcard r-left"><span class="mnum">01</span><span class="memi">🧀</span><h3 class="mtitle"><span class="es">La Clásica</span><span class="en">The Classic</span></h3><p class="msub"><span class="es">Pizza de Queso · La Original</span><span class="en">Cheese Pizza · The Original</span></p><p class="mdesc"><span class="es">Queso Gouda sobre salsa dulce de tomate con comino. La base de todo. La que lo empezó.</span><span class="en">Gouda on sweet tomato sauce with cumin. The base of everything. The one that started it all.</span></p></div>
+      <div class="mcard r-up d1"><span class="mnum">02</span><span class="memi">🥩</span><h3 class="mtitle"><span class="es">La de Jamón</span><span class="en">The Ham</span></h3><p class="msub"><span class="es">Jamón Hecho en Casa · La Reina</span><span class="en">House-Cured Ham · The Queen</span></p><p class="mdesc"><span class="es">Nuestro jamón curado en casa, debajo del queso Gouda. El jamón va abajo — la tradición cubana manda.</span><span class="en">Our house-cured ham, buried under Gouda. Toppings go underneath — Cuban tradition demands it.</span></p></div>
+      <div class="mcard r-right d2"><span class="mnum">03</span><span class="memi">🌶️</span><h3 class="mtitle"><span class="es">La de Chorizo</span><span class="en">The Chorizo</span></h3><p class="msub"><span class="es">Chorizo Español · Estilo Habanero</span><span class="en">Spanish Chorizo · Havana Style</span></p><p class="mdesc"><span class="es">Chorizo molido estilo cubano — no en rebanadas, molido como carne. La favorita de La Habana.</span><span class="en">Ground Spanish chorizo Cuban-style — not sliced, ground like meat. Havana's favorite.</span></p></div>
+      <div class="mcard r-left"><span class="mnum">04</span><span class="memi">🍍</span><h3 class="mtitle"><span class="es">La Hawaiana Cubana</span><span class="en">Cuban Hawaiian</span></h3><p class="msub"><span class="es">Jamón + Piña · El Debate Eterno</span><span class="en">Ham + Pineapple · The Eternal Debate</span></p><p class="mdesc"><span class="es">En Cuba, la hawaiana es enorme. Jamón de casa, piña fresca, Gouda. Discútelo con alguien más.</span><span class="en">In Cuba, Hawaiian is massive. House ham, fresh pineapple, Gouda. Argue about it with someone else.</span></p></div>
+      <div class="mcard r-up d1"><span class="mnum">05</span><span class="memi">🦐</span><h3 class="mtitle"><span class="es">La Especial del Mar</span><span class="en">The Ocean Special</span></h3><p class="msub"><span class="es">Camarones · Solo en Vallarta</span><span class="en">Shrimp · Only in Vallarta</span></p><p class="mdesc"><span class="es">Puerto Vallarta tiene el mar. Los cubanos usan camarones en su pizza desde siempre. Esta es nuestra versión local.</span><span class="en">Puerto Vallarta has the ocean. Cubans have used shrimp on pizza forever. This is our local version.</span></p></div>
+      <div class="mcard r-right d2"><span class="mnum">06</span><span class="memi">🌿</span><h3 class="mtitle"><span class="es">La Mixta</span><span class="en">The Works</span></h3><p class="msub"><span class="es">Todo Adentro · Doble Queso</span><span class="en">Everything Inside · Double Cheese</span></p><p class="mdesc"><span class="es">Jamón, chorizo, cebolla caramelizada, pimientos. Doble Gouda. Se dobla, chorrea, te cambia la vida.</span><span class="en">Ham, chorizo, caramelized onion, peppers. Double Gouda. Fold it, let it drip, change your life.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CRAFT ═══ -->
+<section class="craft" id="proceso">
+  <div class="si">
+    <div class="craft-head">
+      <div class="r-left">
+        <p class="slabel"><span class="es">El Proceso</span><span class="en">The Process</span></p>
+        <h2 class="ch2"><span class="es">Hecho a mano.<br><em>Siempre.</em></span><span class="en">Made by hand.<br><em>Always.</em></span></h2>
+      </div>
+      <p class="cintro r-right"><span class="es">No hay atajos aquí. Cada pizza empieza de cero esa mañana. El horno de leña tarda horas en alcanzar la temperatura correcta. El jamón se cura días antes. Eso es lo que la hace diferente.</span><span class="en">No shortcuts here. Every pizza starts from scratch that morning. The wood-fired oven takes hours to reach temperature. The ham cures days in advance. That's what makes it different.</span></p>
+    </div>
+    <div class="csteps">
+      <div class="cstep r-left"><span class="sicon">🪵</span><p class="snum"><span class="es">Paso 01</span><span class="en">Step 01</span></p><h3 class="stitle"><span class="es">El Horno</span><span class="en">The Oven</span></h3><p class="sdesc"><span class="es">Encendemos el horno de leña al amanecer. Tarda 3–4 horas en llegar a 450°C. No hay termostato. Solo experiencia.</span><span class="en">We light the wood-fired oven at dawn. 3–4 hours to reach 450°C. No thermostat. Just experience.</span></p></div>
+      <div class="cstep r-up d1"><span class="sicon">🤲</span><p class="snum"><span class="es">Paso 02</span><span class="en">Step 02</span></p><h3 class="stitle"><span class="es">La Masa</span><span class="en">The Dough</span></h3><p class="sdesc"><span class="es">Harina, leche, azúcar, sal, aceite, levadura. Amasada a mano. Fermentada lento. Nunca congelada.</span><span class="en">Flour, milk, sugar, salt, oil, yeast. Kneaded by hand. Slow-fermented. Never frozen.</span></p></div>
+      <div class="cstep r-up d2"><span class="sicon">🥩</span><p class="snum"><span class="es">Paso 03</span><span class="en">Step 03</span></p><h3 class="stitle"><span class="es">El Jamón</span><span class="en">The Ham</span></h3><p class="sdesc"><span class="es">Curado en casa con sal, azúcar moreno, ajo y especias cubanas. El proceso tarda días. No se puede apresurar.</span><span class="en">House-cured with salt, brown sugar, garlic, and Cuban spices. Takes days. Cannot be rushed.</span></p></div>
+      <div class="cstep r-right d3"><span class="sicon">🍕</span><p class="snum"><span class="es">Paso 04</span><span class="en">Step 04</span></p><h3 class="stitle"><span class="es">La Pizza</span><span class="en">The Pizza</span></h3><p class="sdesc"><span class="es">Salsa dulce, ingredientes debajo del queso, Gouda cubriéndolo todo. Al horno 8–10 minutos. Lista para doblar.</span><span class="en">Sweet sauce, toppings under the cheese, Gouda covering everything. 8–10 minutes. Ready to fold.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MEET THE CHEF ═══ -->
+<section class="chef" id="chef">
+  <div class="si">
+    <div class="chef-inner">
+      <!-- PHOTO — Cuban chef with Cuban pizza -->
+      <div class="chef-photo-wrap r-left">
+        <div class="photo-frame">
+          <img
+            src="https://images.unsplash.com/photo-1600353565696-d5b3c44a1010?w=800&auto=format&fit=crop&q=80"
+            alt="Chef Ray – La Pizza Cubana, Puerto Vallarta"
+          />
+        </div>
+        <div class="chef-badge">
+          <span class="cbadge-top"><span class="es">El Chef</span><span class="en">The Chef</span></span>
+          <span class="cbadge-name">Ray</span>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="r-right">
+        <p class="slabel slabel-lt"><span class="es">Conoce al Maestro</span><span class="en">Meet the Master</span></p>
+        <h2 class="chef-h2 d1"><span class="es">Hola.<br>Me llamo <em>Ray.</em></span><span class="en">Hi.<br>My name is <em>Ray.</em></span></h2>
+        <p class="chef-sub"><span class="es">Pizzero · Puerto Vallarta, México</span><span class="en">Pizza Maker · Puerto Vallarta, Mexico</span></p>
+        <p class="chef-bio r-up d2"><span class="es">Crecí con el olor del horno. En Cuba, la pizza no era un lujo — era el desayuno, el almuerzo, la cena. Era lo que había. Y lo que había era <strong>extraordinario</strong>.</span><span class="en">I grew up with the smell of the oven. In Cuba, pizza wasn't a luxury — it was breakfast, lunch, dinner. It was what there was. And what there was was <strong>extraordinary</strong>.</span></p>
+        <p class="chef-bio r-up d2"><span class="es">El horno de leña no es un equipo — es un socio. Lo enciendo antes del amanecer. Lo cuido todo el día. Él hace la pizza. Yo solo la preparo.</span><span class="en">The wood-fired oven isn't equipment — it's a partner. I light it before dawn. I tend to it all day. It makes the pizza. I just prepare it.</span></p>
+        <span class="chef-sig r-up d3">Ray</span>
+        <div class="chef-facts r-up d4">
+          <div class="cfact"><span class="cfact-icon">🔥</span><p class="cfact-lbl"><span class="es">Horno de Leña<br>al Aire Libre</span><span class="en">Outdoor<br>Wood-Fired Oven</span></p></div>
+          <div class="cfact"><span class="cfact-icon">🥩</span><p class="cfact-lbl"><span class="es">Jamón Curado<br>en Casa</span><span class="en">House-Cured<br>Ham</span></p></div>
+          <div class="cfact"><span class="cfact-icon">🤲</span><p class="cfact-lbl"><span class="es">100% Hecho<br>a Mano</span><span class="en">100% Handmade<br>Every Day</span></p></div>
+          <div class="cfact"><span class="cfact-icon">🇨🇺</span><p class="cfact-lbl"><span class="es">Receta<br>Cubana Original</span><span class="en">Original Cuban<br>Recipe</span></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BLOG ═══ -->
+<section class="blog" id="blog">
+  <div class="si">
+    <div class="blog-head">
+      <p class="slabel r-left"><span class="es">Historias y Cultura</span><span class="en">Stories &amp; Culture</span></p>
+      <h2 class="blog-h2 r-left d1"><span class="es">Más que pizza.<br><em>Es memoria.</em></span><span class="en">More than pizza.<br><em>It's memory.</em></span></h2>
+      <p class="blog-sub r-up d2"><span class="es">La pizza cubana carga el peso de una nación. Aquí contamos su historia.</span><span class="en">Cuban pizza carries the weight of a nation. Here we tell its story.</span></p>
+    </div>
+    <div class="blog-grid">
+      <a href="la-historia.html" class="blog-main r-left">
+        <p class="btag"><span class="es">Historia · Cuba</span><span class="en">History · Cuba</span></p>
+        <h3 class="blog-card-title"><span class="es">El Período Especial y la Ventanita que Alimentó a Cuba</span><span class="en">The Special Period and the Pizza Window That Fed Cuba</span></h3>
+        <p class="blog-card-body"><span class="es">En 1990, la URSS colapsó y Cuba perdió el 80% de su comercio de golpe. El cubano promedio bajó entre 10 y 20 kilos. En ese momento de crisis extrema, una rendija en la pared con un horno de carbón adentro se convirtió en el corazón de cada barrio. Esta es la historia completa de cómo nació la pizza cubana.</span><span class="en">In 1990, the USSR collapsed and Cuba lost 80% of its trade overnight. The average Cuban lost 10–20 kilos. A slit in the wall with a charcoal oven became the heart of every neighborhood. This is the full story of how Cuban pizza was born.</span></p>
+        <span class="blog-more"><span class="es">Leer la historia completa →</span><span class="en">Read the full story →</span></span>
+      </a>
+      <div class="blog-right">
+        <a href="la-historia.html#gouda" class="blog-sm r-right">
+          <p class="btag" style="color:var(--paprika);"><span class="es">Ingredientes</span><span class="en">Ingredients</span></p>
+          <h3 class="blog-card-title"><span class="es">¿Por Qué Queso Gouda en la Pizza Cubana?</span><span class="en">Why Gouda Cheese on Cuban Pizza?</span></h3>
+          <p class="blog-card-body"><span class="es">Italia tiene mozzarella. Cuba tiene Gouda. La historia de cómo el queso holandés se convirtió en el sabor definitivo.</span><span class="en">Italy has mozzarella. Cuba has Gouda. How Dutch cheese became the defining flavor of Cuban pizza.</span></p>
+          <span class="blog-more"><span class="es">Leer →</span><span class="en">Read →</span></span>
+        </a>
+        <a href="la-historia.html#diaspora" class="blog-sm r-right d2">
+          <p class="btag" style="color:var(--paprika);"><span class="es">Vallarta</span><span class="en">Vallarta</span></p>
+          <h3 class="blog-card-title"><span class="es">La Primera Pizza Cubana Auténtica en Puerto Vallarta</span><span class="en">The First Authentic Cuban Pizza in Puerto Vallarta</span></h3>
+          <p class="blog-card-body"><span class="es">Por qué elegimos Vallarta para traer esta tradición al Pacífico mexicano — y por qué no había ningún pizzero cubano antes.</span><span class="en">Why we chose Vallarta to bring this tradition to Mexico's Pacific coast — and why no one had done it before.</span></p>
+          <span class="blog-more"><span class="es">Leer →</span><span class="en">Read →</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA / CONTACT ═══ -->
+<section class="cta" id="contacto">
+  <div class="cta-inner">
+    <p class="slabel slabel-lt r-up" style="justify-content:center;"><span class="es">¿Listo para Probarla?</span><span class="en">Ready to Try It?</span></p>
+    <h2 class="cta-h2 r-up d1"><span class="es">Dóblala.<br>Que chorree.<br><em>Así se come.</em></span><span class="en">Fold it.<br>Let it drip.<br><em>That's how it's eaten.</em></span></h2>
+    <p class="cta-body r-up d2"><span class="es">Horno de leña al aire libre. Masa amasada esa mañana. Jamón curado en casa. La pizza que alimentó a Cuba — ahora en Puerto Vallarta. Solo hacemos un número limitado de pizzas cada día.</span><span class="en">Outdoor wood-fired oven. Dough kneaded that morning. House-cured ham. The pizza that fed Cuba — now in Puerto Vallarta. We only make a limited number of pizzas each day.</span></p>
+    <div class="cta-btns r-up d2">
+      <a href="https://wa.me/521" class="btn-white"><span class="es">📱 Ordenar por WhatsApp</span><span class="en">📱 Order on WhatsApp</span></a>
+      <a href="#top" class="btn-ghost" style="color:rgba(245,237,216,.8);border-color:rgba(245,237,216,.28);"><span class="es">📍 Cómo Llegar</span><span class="en">📍 Get Directions</span></a>
+    </div>
+    <p class="cta-loc r-up d3">📍 <strong>Puerto Vallarta, Jalisco, México</strong> <span class="es">— Horno al aire libre</span><span class="en">— Outdoor wood-fired oven</span></p>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <p class="fbrand">🔥 La Pizza Cubana</p>
+      <p class="ftagline"><span class="es">Auténtica pizza cubana hecha a mano en horno de leña. Puerto Vallarta, México. Tan cubana como el congrí.</span><span class="en">Authentic Cuban pizza handmade in a wood-fired oven. Puerto Vallarta, Mexico. As Cuban as congrí.</span></p>
+    </div>
+    <div>
+      <p class="fcol-title"><span class="es">Menú</span><span class="en">Menu</span></p>
+      <ul class="flinks">
+        <li><a href="#menu"><span class="es">La Clásica</span><span class="en">The Classic</span></a></li>
+        <li><a href="#menu"><span class="es">La de Jamón</span><span class="en">The Ham</span></a></li>
+        <li><a href="#menu"><span class="es">La de Chorizo</span><span class="en">The Chorizo</span></a></li>
+        <li><a href="#menu"><span class="es">La Mixta</span><span class="en">The Works</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fcol-title"><span class="es">El Lugar</span><span class="en">The Place</span></p>
+      <ul class="flinks">
+        <li><a href="la-historia.html"><span class="es">La Historia</span><span class="en">The History</span></a></li>
+        <li><a href="#chef"><span class="es">Conoce a Ray</span><span class="en">Meet Ray</span></a></li>
+        <li><a href="#blog"><span class="es">Blog</span><span class="en">Blog</span></a></li>
+        <li><a href="#contacto"><span class="es">Ordenar / Contacto</span><span class="en">Order / Contact</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <p class="fcopy">© 2026 La Pizza Cubana · Puerto Vallarta, México · Todos los derechos reservados</p>
+    <p class="fpv">Puerto Vallarta 🌊🔥</p>
+  </div>
+</footer>
+
+<script>
+// CURSOR (desktop only)
+const cur=document.getElementById('cur'),cr=document.getElementById('cr');
+if(cur&&cr){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();document.querySelectorAll('a,button,.mcard,.blog-main,.blog-sm,.cstep,.cfact').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.4)';cr.style.transform='translate(-50%,-50%) scale(1.7)';cr.style.opacity='.85';});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cr.style.transform='translate(-50%,-50%) scale(1)';cr.style.opacity='.45';});});}
+
+// MOBILE NAV
+function openMobileNav(){document.getElementById('mobileNav').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobileNav(){document.getElementById('mobileNav').classList.remove('open');document.body.style.overflow='';}
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1});
+document.querySelectorAll('.r-up,.r-left,.r-right,.r-scale').forEach(el=>obs.observe(el));
+
+// STICKY NAV
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('stuck',window.scrollY>80);});
+
+// LANGUAGE TOGGLE
+let en=false;
+function tl(){en=!en;document.body.className=en?'lang-en':'lang-es';document.getElementById('ll').textContent=en?'Español':'English';document.documentElement.lang=en?'en':'es';}
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+</script>
+</body>
+</html>
