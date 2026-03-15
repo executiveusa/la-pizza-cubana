@@ -1,49 +1,29 @@
 name: Ray Daily Content Reminder
 
 # Runs every day at 9am Mexico City time (UTC-6 = 15:00 UTC)
-# To enable: add WHATSAPP_NOTIFY_NUMBER secret in GitHub repo settings
-# Optional: add TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID for Telegram alerts
-
 on:
   schedule:
-    - cron: '0 15 * * *'   # 9:00am CST (UTC-6) Monday–Sunday
+    - cron: '0 15 * * *'   # 9:00am CST (UTC-6) Monday-Sunday
   workflow_dispatch:        # Manual run button in GitHub UI
 
 jobs:
   daily-reminder:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate daily social media reminder
+      - name: Trigger Pope Bot daily briefing
+        env:
+          POPE_SECRET: ${{ secrets.POPE_SECRET }}
         run: |
-          DAY=$(date +%A)
-          DATE=$(date '+%d %B %Y')
-          echo "==================================="
-          echo "  La Pizza Cubana — Daily Brief"
-          echo "  $DAY, $DATE"
-          echo "==================================="
-          echo ""
-          echo "TODO para hoy, Ray:"
-          echo "  1. ✅ Publicar en Instagram (usa plantilla en ray.html)"
-          echo "  2. ✅ Revisar mensajes de WhatsApp"
-          echo "  3. ✅ Revisar reseñas en Google Maps"
-          echo "  4. ✅ Contar pizzas del día en el dashboard"
-          echo ""
-          echo "🍕 Dashboard: https://la-pizza-cubana.vercel.app/ray"
-          echo "📲 WhatsApp:  https://wa.me/5213223041169"
-          echo ""
-          echo "ZTE-POPE-BOT STUB v1.0"
-          echo "Ready to wire with thepopebot when API keys are provided."
-          echo "See: https://github.com/executiveusa/paulis-pope-bot"
-
-      # OPTIONAL TELEGRAM NOTIFICATION
-      # Uncomment and add TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID secrets to enable
-      #- name: Send Telegram notification
-      #  if: env.TELEGRAM_BOT_TOKEN != ''
-      #  env:
-      #    TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-      #    TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      #  run: |
-      #    curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-      #      -d "chat_id=${TELEGRAM_CHAT_ID}" \
-      #      -d "parse_mode=Markdown" \
-      #      -d "text=🍕 *La Pizza Cubana — Resumen Diario*%0A%0ATODO para hoy, Ray:%0A✅ Publicar en Instagram%0A✅ Revisar WhatsApp%0A✅ Revisar Google reseñas%0A%0A[Abrir Dashboard](https://la-pizza-cubana.vercel.app/ray)"
+          echo "Calling /api/pope ..."
+          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
+            -X POST "https://la-pizza-cubana.vercel.app/api/pope" \
+            -H "x-pope-secret: ${POPE_SECRET}" \
+            -H "Content-Type: application/json")
+          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS:" | cut -d: -f2)
+          BODY=$(echo "$RESPONSE" | grep -v "HTTP_STATUS:")
+          echo "Status: $HTTP_STATUS"
+          echo "Response: $BODY"
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "WARNING: Pope bot returned non-200 status"
+            exit 1
+          fi

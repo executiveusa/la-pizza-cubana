@@ -471,9 +471,22 @@ function setDate(){
 function todayKey(){return'ray_stats_'+new Date().toISOString().split('T')[0];}
 function getStats(){return JSON.parse(localStorage.getItem(todayKey())||'{"pizzas":0,"customers":0,"orders":0}');}
 function saveStats(s){localStorage.setItem(todayKey(),JSON.stringify(s));}
-function inc(k){const s=getStats();s[k]=(s[k]||0)+1;saveStats(s);renderStats();}
+function inc(k){
+  const s=getStats();s[k]=(s[k]||0)+1;saveStats(s);renderStats();
+  fetch('/api/stats',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({field:k,delta:1})})
+    .catch(()=>{/* localStorage already updated */});
+}
 function resetStats(){if(confirm('¿Reiniciar los contadores de hoy?')){saveStats({pizzas:0,customers:0,orders:0});renderStats();}}
 function renderStats(){const s=getStats();document.getElementById('cnt-pizzas').textContent=s.pizzas||0;document.getElementById('cnt-customers').textContent=s.customers||0;document.getElementById('cnt-orders').textContent=s.orders||0;}
+function syncStats(){
+  fetch('/api/stats')
+    .then(r=>r.json())
+    .then(data=>{
+      const s={pizzas:data.pizzas||0,customers:data.customers||0,orders:data.orders||0};
+      saveStats(s);renderStats();
+    })
+    .catch(()=>{/* keep local */});
+}
 
 // ── NOTES ──
 function loadNotes(){const n=localStorage.getItem('ray_notes_'+new Date().toISOString().split('T')[0])||'';document.getElementById('day-notes').value=n;}
@@ -525,7 +538,7 @@ function resetChecklist(){
 }
 
 // ── INIT ──
-function loadAll(){setDate();renderStats();loadNotes();loadChecklist();}
+function loadAll(){setDate();renderStats();loadNotes();loadChecklist();syncStats();setInterval(syncStats,60000);}
 </script>
 </body>
 </html>
