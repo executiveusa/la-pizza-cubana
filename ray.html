@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ray's Dashboard · La Pizza Cubana</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EDD8;--cream-dark:#EAD9B8;--paprika:#C0392B;--paprika-dark:#922B21;
+  --charcoal:#1A1209;--tobacco:#2C1A0E;--ochre:#C97A2A;--ochre-light:#E8A84C;
+  --ash:#7A6550;--warm-white:#FDF8F0;
+  --green:#2D6A4F;--green-light:#52B788;
+  --blue:#1877F2;--instagram:#E1306C;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--charcoal);color:var(--cream);font-family:'Libre Baskerville',Georgia,serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* ── PIN LOCK ── */
+#lock{position:fixed;inset:0;background:var(--charcoal);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;}
+#lock h2{font-family:'Oswald',sans-serif;font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--ochre);}
+#lock p{font-size:13px;color:var(--ash);text-align:center;max-width:260px;line-height:1.6;}
+#pin-input{background:rgba(245,237,216,.08);border:1px solid rgba(245,237,216,.18);color:var(--cream);font-size:24px;letter-spacing:8px;text-align:center;padding:14px 24px;width:180px;border-radius:8px;outline:none;font-family:'Oswald',sans-serif;}
+#pin-input:focus{border-color:var(--ochre-light);}
+#pin-error{color:var(--paprika);font-size:12px;min-height:16px;font-family:'Oswald',sans-serif;letter-spacing:1px;text-transform:uppercase;}
+#pin-btn{background:var(--paprika);color:var(--cream);border:none;padding:14px 36px;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;border-radius:8px;cursor:pointer;min-height:48px;touch-action:manipulation;}
+#pin-btn:hover{background:var(--paprika-dark);}
+
+/* ── HEADER ── */
+header{background:var(--tobacco);border-bottom:1px solid rgba(245,237,216,.08);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.h-brand{display:flex;align-items:center;gap:12px;}
+.h-logo{font-family:'Oswald',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ochre);}
+.h-sub{font-size:11px;color:var(--ash);letter-spacing:1px;text-transform:uppercase;}
+.h-date{font-family:'Oswald',sans-serif;font-size:13px;color:var(--ash);letter-spacing:1px;}
+.h-back{color:var(--ash);font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(245,237,216,.12);padding:8px 14px;border-radius:6px;transition:all .2s;min-height:44px;display:inline-flex;align-items:center;}
+.h-back:hover{border-color:var(--ochre-light);color:var(--ochre-light);}
+
+/* ── LAYOUT ── */
+.wrap{max-width:900px;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:32px;}
+
+/* ── SECTION TITLE ── */
+.st{font-family:'Oswald',sans-serif;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--ash);margin-bottom:16px;}
+
+/* ── CARD ── */
+.card{background:rgba(245,237,216,.04);border:1px solid rgba(245,237,216,.08);border-radius:12px;padding:24px;}
+
+/* ── QUICK ACTIONS ── */
+.qa-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.qa-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px 12px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;min-height:88px;touch-action:manipulation;transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent;}
+.qa-btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.3);}
+.qa-btn:active{transform:translateY(0);}
+.qa-icon{font-size:28px;line-height:1;}
+.qa-label{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;}
+.qa-desc{font-size:10px;letter-spacing:.5px;}
+.qa-wa{background:#25D366;color:#fff;}
+.qa-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;}
+.qa-fb{background:var(--blue);color:#fff;}
+.qa-maps{background:#EA4335;color:#fff;}
+.qa-phone{background:var(--ochre);color:var(--charcoal);}
+.qa-wa2{background:rgba(37,210,102,.12);border:1px solid rgba(37,210,102,.3);color:#25D366;}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.stat{background:rgba(245,237,216,.04);border:1px solid rgba(245,237,216,.08);border-radius:10px;padding:16px;text-align:center;}
+.stat-num{font-family:'Oswald',sans-serif;font-size:36px;font-weight:700;color:var(--ochre-light);line-height:1;}
+.stat-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-top:4px;}
+.stat-btn{background:none;border:none;cursor:pointer;color:var(--paprika);font-size:22px;padding:4px;touch-action:manipulation;display:block;margin:6px auto 0;}
+.stat-btn:hover{color:var(--ochre);}
+.stat-note{font-size:10px;color:var(--ash);margin-top:4px;}
+
+/* ── NOTES ── */
+.notes-area{width:100%;background:rgba(245,237,216,.04);border:1px solid rgba(245,237,216,.12);color:var(--cream);font-family:'Libre Baskerville',Georgia,serif;font-size:14px;line-height:1.7;padding:16px;border-radius:8px;resize:vertical;min-height:100px;outline:none;}
+.notes-area:focus{border-color:var(--ochre-light);}
+.notes-area::placeholder{color:var(--ash);}
+.save-btn{margin-top:8px;background:none;border:1px solid rgba(245,237,216,.18);color:var(--ash);font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border-radius:6px;cursor:pointer;transition:all .2s;min-height:40px;touch-action:manipulation;}
+.save-btn:hover{border-color:var(--ochre-light);color:var(--ochre-light);}
+.save-msg{font-size:11px;color:var(--green-light);font-family:'Oswald',sans-serif;letter-spacing:1px;margin-top:6px;min-height:16px;text-transform:uppercase;}
+
+/* ── TEMPLATES ── */
+.tab-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px;}
+.tab{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;background:none;border:1px solid rgba(245,237,216,.12);color:var(--ash);cursor:pointer;border-radius:6px;transition:all .2s;min-height:36px;touch-action:manipulation;}
+.tab.active,.tab:hover{border-color:var(--ochre);color:var(--ochre);}
+.tpl-panel{display:none;}
+.tpl-panel.active{display:block;}
+.tpl-item{background:rgba(245,237,216,.04);border:1px solid rgba(245,237,216,.06);border-radius:8px;padding:16px;margin-bottom:10px;}
+.tpl-title{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ochre);margin-bottom:8px;}
+.tpl-text{font-size:13px;line-height:1.7;color:var(--cream-dark);white-space:pre-wrap;}
+.copy-btn{margin-top:10px;background:none;border:1px solid rgba(245,237,216,.14);color:var(--ash);font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;border-radius:5px;cursor:pointer;transition:all .2s;min-height:36px;touch-action:manipulation;}
+.copy-btn:hover{border-color:var(--green-light);color:var(--green-light);}
+.copy-btn.copied{border-color:var(--green-light);color:var(--green-light);}
+
+/* ── CHECKLIST ── */
+.checklist{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.checklist li{display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(245,237,216,.03);border:1px solid rgba(245,237,216,.06);border-radius:8px;font-size:13px;color:var(--cream-dark);cursor:pointer;touch-action:manipulation;user-select:none;transition:background .15s;-webkit-tap-highlight-color:transparent;}
+.checklist li:hover{background:rgba(245,237,216,.06);}
+.checklist li.done{color:var(--ash);text-decoration:line-decoration;}
+.checklist li.done .chk{background:var(--green);border-color:var(--green);}
+.checklist li.done .ck-lbl{opacity:.5;}
+.chk{width:20px;height:20px;min-width:20px;border:1.5px solid rgba(245,237,216,.22);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;}
+.reset-btn{margin-top:12px;background:none;border:1px solid rgba(245,237,216,.1);color:var(--ash);font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;border-radius:6px;cursor:pointer;min-height:36px;touch-action:manipulation;}
+.reset-btn:hover{border-color:var(--paprika);color:var(--paprika);}
+
+/* ── HELP SECTION ── */
+.help-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.help-item{padding:16px;background:rgba(245,237,216,.03);border:1px solid rgba(245,237,216,.06);border-radius:8px;}
+.help-q{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:1px;color:var(--ochre);margin-bottom:8px;text-transform:uppercase;}
+.help-a{font-size:12px;line-height:1.7;color:var(--ash);}
+
+/* ── FOOTER ── */
+.dash-footer{text-align:center;padding:40px 24px;font-size:11px;color:var(--ash);letter-spacing:1px;font-family:'Oswald',sans-serif;text-transform:uppercase;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .qa-grid{grid-template-columns:1fr 1fr;}
+  .stats-grid{grid-template-columns:1fr 1fr 1fr;}
+  .help-grid{grid-template-columns:1fr;}
+  .wrap{padding:24px 16px;gap:24px;}
+  header{padding:16px 18px;}
+}
+@media(max-width:380px){
+  .qa-grid{grid-template-columns:1fr 1fr;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .stat-num{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<!-- PIN LOCK -->
+<div id="lock">
+  <h2>🍕 Dashboard de Ray</h2>
+  <p>Ingresa tu PIN para acceder al panel de La Pizza Cubana</p>
+  <input type="password" id="pin-input" placeholder="••••" maxlength="6" autocomplete="off" aria-label="PIN de acceso">
+  <div id="pin-error"></div>
+  <button id="pin-btn" onclick="checkPin()">Entrar</button>
+</div>
+
+<!-- DASHBOARD (hidden until PIN) -->
+<div id="app" style="display:none;">
+
+<header>
+  <div class="h-brand">
+    <div>
+      <div class="h-logo">La Pizza Cubana</div>
+      <div class="h-sub">Panel de Ray</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+    <div class="h-date" id="hdate"></div>
+    <a href="index.html" class="h-back">← Sitio</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- QUICK ACTIONS -->
+  <section>
+    <div class="st">Acciones Rápidas</div>
+    <div class="qa-grid">
+      <a href="https://wa.me/5213223041169" target="_blank" rel="noopener" class="qa-btn qa-wa">
+        <span class="qa-icon">💬</span>
+        <span class="qa-label">WhatsApp</span>
+        <span class="qa-desc">Ver mensajes</span>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="qa-btn qa-ig">
+        <span class="qa-icon">📸</span>
+        <span class="qa-label">Instagram</span>
+        <span class="qa-desc">Publicar foto</span>
+      </a>
+      <a href="https://facebook.com" target="_blank" rel="noopener" class="qa-btn qa-fb">
+        <span class="qa-icon">👥</span>
+        <span class="qa-label">Facebook</span>
+        <span class="qa-desc">Ver página</span>
+      </a>
+      <a href="https://maps.google.com" target="_blank" rel="noopener" class="qa-btn qa-maps">
+        <span class="qa-icon">📍</span>
+        <span class="qa-label">Google Maps</span>
+        <span class="qa-desc">Ver reseñas</span>
+      </a>
+      <a href="tel:+523223041169" class="qa-btn qa-phone" style="grid-column:span 1;">
+        <span class="qa-icon">📞</span>
+        <span class="qa-label">Llamar</span>
+        <span class="qa-desc">+52 322 304 1169</span>
+      </a>
+      <a href="https://wa.me/5213223041169?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20pizza%20cubana%20🍕" target="_blank" rel="noopener" class="qa-btn qa-wa2">
+        <span class="qa-icon">🛵</span>
+        <span class="qa-label">Nuevo Pedido</span>
+        <span class="qa-desc">Abrir chat</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- TODAY'S STATS -->
+  <section>
+    <div class="st">Hoy: <span id="today-label"></span></div>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num" id="cnt-pizzas">0</div>
+        <div class="stat-lbl">Pizzas Hoy</div>
+        <button class="stat-btn" onclick="inc('pizzas')" aria-label="Sumar pizza">＋</button>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="cnt-customers">0</div>
+        <div class="stat-lbl">Clientes</div>
+        <button class="stat-btn" onclick="inc('customers')" aria-label="Sumar cliente">＋</button>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="cnt-orders">0</div>
+        <div class="stat-lbl">Pedidos WA</div>
+        <button class="stat-btn" onclick="inc('orders')" aria-label="Sumar pedido">＋</button>
+      </div>
+    </div>
+    <div style="margin-top:8px;text-align:right;">
+      <button class="reset-btn" onclick="resetStats()">Reiniciar contadores</button>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="card">
+    <div class="st">Notas del Día</div>
+    <textarea id="day-notes" class="notes-area" placeholder="Escribe aquí tus notas de hoy: ingredientes que faltan, pedidos especiales, ideas para mañana..."></textarea>
+    <button class="save-btn" onclick="saveNotes()">Guardar notas</button>
+    <div class="save-msg" id="save-msg"></div>
+  </section>
+
+  <!-- CONTENT TEMPLATES -->
+  <section>
+    <div class="st">Plantillas de Contenido</div>
+    <div class="tab-bar">
+      <button class="tab active" onclick="showTab('ig-es')">Instagram ES</button>
+      <button class="tab" onclick="showTab('ig-en')">Instagram EN</button>
+      <button class="tab" onclick="showTab('fb')">Facebook</button>
+      <button class="tab" onclick="showTab('wa')">WhatsApp</button>
+    </div>
+
+    <div id="tpl-ig-es" class="tpl-panel active">
+      <div class="tpl-item">
+        <div class="tpl-title">Post Clásico</div>
+        <div class="tpl-text">🍕 La pizza que alimentó a Cuba, ahora en Puerto Vallarta.
+
+Masa fina, queso derretido, salsa de tomate artesanal — hecha a mano en horno de leña, igual que siempre.
+
+¿Ya la probaste? 👇
+
+📍 Puerto Vallarta, Jalisco
+📲 Ordena por WhatsApp: wa.me/5213223041169
+
+#LaPizzaCubana #PuertoVallarta #PizzaCubana #ComidaCubana #PizzaArtesanal</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+      <div class="tpl-item">
+        <div class="tpl-title">Viernes de Pizza</div>
+        <div class="tpl-text">🔥 VIERNES DE PIZZA 🔥
+
+Esta noche el horno está encendido y las pizzas están listas.
+
+La misma receta que llegó desde La Habana — masa crujiente, ingredientes frescos, amor de verdad.
+
+¡Escríbenos por WhatsApp y la llevamos a tu mesa! 🛵
+
+📲 +52 322 304 1169
+
+#ViernesDePizza #PizzaCubana #PuertoVallarta #PizzaArtesanal #HechoCon❤️</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+      <div class="tpl-item">
+        <div class="tpl-title">Historia (Story)</div>
+        <div class="tpl-text">🍕 Una pizza con historia.
+
+En Cuba, la pizza se inventó por necesidad — pocos ingredientes, mucha creatividad.
+
+Hoy la traemos a Puerto Vallarta con todo el alma cubana.
+
+Desliza → Para ordenar</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+    </div>
+
+    <div id="tpl-ig-en" class="tpl-panel">
+      <div class="tpl-item">
+        <div class="tpl-title">Classic Post (English)</div>
+        <div class="tpl-text">🍕 The pizza that fed Cuba — now in Puerto Vallarta.
+
+Thin crust, melted cheese, handmade tomato sauce. Made in a wood-fired oven, just like always.
+
+Have you tried it yet? 👇
+
+📍 Puerto Vallarta, Jalisco, Mexico
+📲 Order via WhatsApp: wa.me/5213223041169
+
+#CubanPizza #PuertoVallarta #LaPizzaCubana #ArtisanPizza #MexicoFood</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+      <div class="tpl-item">
+        <div class="tpl-title">Weekend Post (English)</div>
+        <div class="tpl-text">Weekend plans? 🍕
+
+Skip the ordinary. Come try the pizza that survived the Cuban Special Period and made it all the way to Puerto Vallarta.
+
+Handmade. Wood-fired. Absolutely worth it.
+
+Message us on WhatsApp to order! 📲
+
+#CubanFood #PuertoVallartaEats #WeekendPizza #LaPizzaCubana</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+    </div>
+
+    <div id="tpl-fb" class="tpl-panel">
+      <div class="tpl-item">
+        <div class="tpl-title">Post de Facebook</div>
+        <div class="tpl-text">🍕 La Pizza Cubana ya está lista para ti.
+
+¿Sabías que la pizza cubana tiene su propia historia? Durante el Período Especial en Cuba, cuando escaseaba la comida, los cubanos crearon su propia versión de la pizza — simple, deliciosa y llena de creatividad.
+
+Hoy traemos esa tradición a Puerto Vallarta.
+
+✅ Masa hecha a mano
+✅ Horno de leña
+✅ Ingredientes frescos
+✅ Entrega por WhatsApp
+
+¡Escríbenos para hacer tu pedido! 👇
+📲 +52 322 304 1169
+
+¿Ya la probaste? Cuéntanos en los comentarios ⬇️</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+      <div class="tpl-item">
+        <div class="tpl-title">Respuesta a Reseña Positiva</div>
+        <div class="tpl-text">¡Muchas gracias por tu reseña! 🙏🍕
+
+Nos alegra mucho que hayas disfrutado la pizza cubana. Tu apoyo nos motiva a seguir cocinando con todo el amor y tradición de Cuba.
+
+¡Esperamos verte pronto de nuevo en La Pizza Cubana! 🌊🔥</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+    </div>
+
+    <div id="tpl-wa" class="tpl-panel">
+      <div class="tpl-item">
+        <div class="tpl-title">Respuesta de Bienvenida</div>
+        <div class="tpl-text">¡Hola! 👋 Bienvenido a La Pizza Cubana 🍕
+
+Gracias por escribirnos. ¿En qué te podemos ayudar?
+
+📋 Para hacer tu pedido escríbenos:
+• ¿Qué pizza quieres?
+• ¿Tu dirección o vienes a recogerla?
+
+¡Estamos aquí para servirte! 🌊🔥</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+      <div class="tpl-item">
+        <div class="tpl-title">Confirmar Pedido</div>
+        <div class="tpl-text">✅ ¡Pedido confirmado!
+
+Tu pizza está en el horno 🔥
+
+Tiempo estimado: 20-30 minutos.
+
+¡Gracias por elegir La Pizza Cubana! 🍕</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+      <div class="tpl-item">
+        <div class="tpl-title">No Disponible</div>
+        <div class="tpl-text">Hola 👋
+
+En este momento no estamos disponibles, pero te responderemos muy pronto.
+
+¡Gracias por tu paciencia! 🙏🍕
+
+— La Pizza Cubana</div>
+        <button class="copy-btn" onclick="copyTpl(this)">Copiar texto</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAILY CHECKLIST -->
+  <section>
+    <div class="st">Lista del Día</div>
+    <ul class="checklist" id="checklist">
+      <li onclick="toggleCheck(this)" data-id="c1"><span class="chk"></span><span class="ck-lbl">Encender horno de leña</span></li>
+      <li onclick="toggleCheck(this)" data-id="c2"><span class="chk"></span><span class="ck-lbl">Preparar masa del día</span></li>
+      <li onclick="toggleCheck(this)" data-id="c3"><span class="chk"></span><span class="ck-lbl">Revisar ingredientes frescos</span></li>
+      <li onclick="toggleCheck(this)" data-id="c4"><span class="chk"></span><span class="ck-lbl">Responder mensajes de WhatsApp</span></li>
+      <li onclick="toggleCheck(this)" data-id="c5"><span class="chk"></span><span class="ck-lbl">Publicar en Instagram</span></li>
+      <li onclick="toggleCheck(this)" data-id="c6"><span class="chk"></span><span class="ck-lbl">Revisar reseñas de Google</span></li>
+      <li onclick="toggleCheck(this)" data-id="c7"><span class="chk"></span><span class="ck-lbl">Contar pizzas del día</span></li>
+      <li onclick="toggleCheck(this)" data-id="c8"><span class="chk"></span><span class="ck-lbl">Limpiar el horno</span></li>
+    </ul>
+    <button class="reset-btn" onclick="resetChecklist()">Reiniciar lista</button>
+  </section>
+
+  <!-- QUICK HELP -->
+  <section>
+    <div class="st">Ayuda Rápida</div>
+    <div class="help-grid">
+      <div class="help-item">
+        <div class="help-q">¿Cómo comparto en Instagram?</div>
+        <div class="help-a">1. Abre Instagram → toca el ＋<br>2. Elige tu foto<br>3. Copia el texto de arriba y pégalo<br>4. Toca "Compartir"</div>
+      </div>
+      <div class="help-item">
+        <div class="help-q">¿Cómo respondo en WhatsApp?</div>
+        <div class="help-a">1. Abre WhatsApp<br>2. Copia el mensaje de plantilla de arriba<br>3. Pégalo en la conversación<br>4. Personaliza si es necesario</div>
+      </div>
+      <div class="help-item">
+        <div class="help-q">¿Cómo subo una reseña de Google?</div>
+        <div class="help-a">Pide a tus clientes satisfechos que busquen "La Pizza Cubana Puerto Vallarta" en Google Maps y dejen 5 estrellas.</div>
+      </div>
+      <div class="help-item">
+        <div class="help-q">¿Olvidé el PIN?</div>
+        <div class="help-a">El PIN es el mismo que usas para entrar a este panel. Si lo olvidaste, habla con tu equipo técnico.</div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /wrap -->
+
+<div class="dash-footer">La Pizza Cubana · Dashboard de Ray · Solo para uso interno</div>
+</div><!-- /app -->
+
+<script>
+// ── PIN CHECK ──
+const CORRECT_PIN = '2407'; // default PIN — change in code to customize
+function checkPin(){
+  const v=document.getElementById('pin-input').value.trim();
+  const err=document.getElementById('pin-error');
+  if(v===CORRECT_PIN){
+    document.getElementById('lock').style.display='none';
+    document.getElementById('app').style.display='block';
+    localStorage.setItem('ray_auth',btoa(Date.now().toString()));
+    loadAll();
+  } else {
+    err.textContent='PIN incorrecto. Inténtalo de nuevo.';
+    document.getElementById('pin-input').value='';
+    document.getElementById('pin-input').focus();
+    setTimeout(()=>err.textContent='',3000);
+  }
+}
+document.getElementById('pin-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPin();});
+
+// Auto-unlock if recent auth (within 4h)
+(function(){
+  const stored=localStorage.getItem('ray_auth');
+  if(stored){
+    try{
+      const ts=parseInt(atob(stored));
+      if(Date.now()-ts<4*60*60*1000){
+        document.getElementById('lock').style.display='none';
+        document.getElementById('app').style.display='block';
+        loadAll();
+      }
+    }catch(e){localStorage.removeItem('ray_auth');}
+  }
+})();
+
+// ── DATE ──
+function setDate(){
+  const d=new Date();
+  const days=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const months=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  document.getElementById('hdate').textContent=days[d.getDay()]+', '+d.getDate()+' de '+months[d.getMonth()]+' '+d.getFullYear();
+  document.getElementById('today-label').textContent=days[d.getDay()]+', '+d.getDate()+' de '+months[d.getMonth()];
+}
+
+// ── STATS ──
+function todayKey(){return'ray_stats_'+new Date().toISOString().split('T')[0];}
+function getStats(){return JSON.parse(localStorage.getItem(todayKey())||'{"pizzas":0,"customers":0,"orders":0}');}
+function saveStats(s){localStorage.setItem(todayKey(),JSON.stringify(s));}
+function inc(k){const s=getStats();s[k]=(s[k]||0)+1;saveStats(s);renderStats();}
+function resetStats(){if(confirm('¿Reiniciar los contadores de hoy?')){saveStats({pizzas:0,customers:0,orders:0});renderStats();}}
+function renderStats(){const s=getStats();document.getElementById('cnt-pizzas').textContent=s.pizzas||0;document.getElementById('cnt-customers').textContent=s.customers||0;document.getElementById('cnt-orders').textContent=s.orders||0;}
+
+// ── NOTES ──
+function loadNotes(){const n=localStorage.getItem('ray_notes_'+new Date().toISOString().split('T')[0])||'';document.getElementById('day-notes').value=n;}
+function saveNotes(){const k='ray_notes_'+new Date().toISOString().split('T')[0];localStorage.setItem(k,document.getElementById('day-notes').value);const m=document.getElementById('save-msg');m.textContent='✓ Guardado';setTimeout(()=>m.textContent='',2000);}
+
+// ── TABS ──
+function showTab(id){
+  document.querySelectorAll('.tpl-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tpl-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── COPY ──
+function copyTpl(btn){
+  const text=btn.previousElementSibling.textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✓ Copiado!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copiar texto';btn.classList.remove('copied');},2000);
+  }).catch(()=>{
+    // Fallback for older browsers
+    const ta=document.createElement('textarea');ta.value=text;ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✓ Copiado!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copiar texto';btn.classList.remove('copied');},2000);
+  });
+}
+
+// ── CHECKLIST ──
+function loadChecklist(){
+  const k='ray_check_'+new Date().toISOString().split('T')[0];
+  const done=JSON.parse(localStorage.getItem(k)||'[]');
+  document.querySelectorAll('#checklist li').forEach(li=>{
+    const id=li.dataset.id;
+    if(done.includes(id)){li.classList.add('done');li.querySelector('.chk').textContent='✓';}
+  });
+}
+function toggleCheck(li){
+  li.classList.toggle('done');
+  li.querySelector('.chk').textContent=li.classList.contains('done')?'✓':'';
+  saveChecklist();
+}
+function saveChecklist(){
+  const k='ray_check_'+new Date().toISOString().split('T')[0];
+  const done=[...document.querySelectorAll('#checklist li.done')].map(l=>l.dataset.id);
+  localStorage.setItem(k,JSON.stringify(done));
+}
+function resetChecklist(){
+  document.querySelectorAll('#checklist li').forEach(li=>{li.classList.remove('done');li.querySelector('.chk').textContent='';});
+  saveChecklist();
+}
+
+// ── INIT ──
+function loadAll(){setDate();renderStats();loadNotes();loadChecklist();}
+</script>
+</body>
+</html>

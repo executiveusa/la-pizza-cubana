@@ -2,20 +2,32 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>La Pizza Cubana – Auténtica · Puerto Vallarta</title>
 <meta name="description" content="Auténtica pizza cubana hecha a mano en horno de leña. La Pizza Cubana, Puerto Vallarta, México.">
+<!-- Open Graph -->
+<meta property="og:title" content="La Pizza Cubana · Puerto Vallarta">
+<meta property="og:description" content="Auténtica pizza cubana hecha a mano en horno de leña. La misma pizza que alimentó a Cuba.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&auto=format&fit=crop&q=80">
+<meta property="og:url" content="https://la-pizza-cubana.vercel.app">
+<meta property="og:type" content="restaurant">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La Pizza Cubana · Puerto Vallarta">
+<meta name="twitter:description" content="La misma pizza que alimentó a Cuba — ahora en Puerto Vallarta.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&auto=format&fit=crop&q=80">
+<!-- Performance -->
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1800&auto=format&fit=crop&q=80">
+<!-- Schema.org LocalBusiness -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"La Pizza Cubana","description":"Auténtica pizza cubana hecha a mano en horno de leña. Puerto Vallarta, México.","telephone":"+523223041169","url":"https://la-pizza-cubana.vercel.app","address":{"@type":"PostalAddress","addressLocality":"Puerto Vallarta","addressRegion":"Jalisco","addressCountry":"MX"},"servesCuisine":"Cuban","priceRange":"$","image":"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&auto=format&fit=crop&q=80"}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@300;400;500;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#F5EDD8;--cream-dark:#EAD9B8;--paprika:#C0392B;--paprika-dark:#922B21;--charcoal:#1A1209;--tobacco:#2C1A0E;--ochre:#C97A2A;--ochre-light:#E8A84C;--ash:#7A6550;--warm-white:#FDF8F0;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--charcoal);font-family:'Libre Baskerville',Georgia,serif;overflow-x:hidden;cursor:none;}
-
-/* CURSOR */
-.cur{width:12px;height:12px;border-radius:50%;background:var(--paprika);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;mix-blend-mode:multiply;}
-.cur-ring{width:40px;height:40px;border:1.5px solid var(--paprika);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .28s cubic-bezier(.25,.46,.45,.94);opacity:.45;}
+body{background:var(--cream);color:var(--charcoal);font-family:'Libre Baskerville',Georgia,serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 
 /* LANG BAR */
 .lang-bar{position:fixed;top:0;left:0;right:0;z-index:700;display:flex;justify-content:flex-end;padding:12px 44px;background:linear-gradient(to bottom,rgba(20,12,4,.9),transparent);}
@@ -54,16 +66,17 @@ nav.stuck{background:rgba(20,12,4,.97);backdrop-filter:blur(10px);top:0;box-shad
 .btn-white:hover{background:var(--ochre-light);color:var(--charcoal);box-shadow:0 10px 30px rgba(232,168,76,.45),0 4px 12px rgba(0,0,0,.3);}
 
 /* SCROLL ANIMATIONS */
-.r-up{opacity:0;transform:translateY(50px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
-.r-left{opacity:0;transform:translateX(-65px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
-.r-right{opacity:0;transform:translateX(65px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
-.r-scale{opacity:0;transform:scale(.93);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);}
-.r-up.on,.r-left.on,.r-right.on,.r-scale.on{opacity:1;transform:none;}
+.r-up{opacity:0;transform:translateY(50px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform;}
+.r-left{opacity:0;transform:translateX(-65px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform;}
+.r-right{opacity:0;transform:translateX(65px);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform;}
+.r-scale{opacity:0;transform:scale(.93);transition:opacity .85s cubic-bezier(.25,.46,.45,.94),transform .85s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform;}
+.r-up.on,.r-left.on,.r-right.on,.r-scale.on{opacity:1;transform:none;will-change:auto;}
 .d1{transition-delay:.12s;}.d2{transition-delay:.24s;}.d3{transition-delay:.36s;}.d4{transition-delay:.48s;}
 @keyframes fu{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+@media(prefers-reduced-motion:reduce){.r-up,.r-left,.r-right,.r-scale{opacity:1;transform:none;transition:none;will-change:auto;}.h-pre,.h-eyebrow,.h1,.h-sub,.h-desc,.h-ctas,.h-scroll{animation:none;opacity:1;}.hero-glow{animation:none;}.ember{display:none;}}
 
 /* ═══ HERO ═══ */
-.hero{height:100vh;min-height:700px;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.hero{height:100vh;height:100dvh;min-height:600px;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
 .hero-bg{position:absolute;inset:0;z-index:0;}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 45%;filter:brightness(.48) saturate(1.15) contrast(1.05);}
 .hero-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(20,12,4,.97) 0%,rgba(20,12,4,.55) 35%,rgba(20,12,4,.12) 65%,rgba(20,12,4,.35) 100%),linear-gradient(to right,rgba(20,12,4,.6) 0%,transparent 55%);}
@@ -214,37 +227,65 @@ footer{background:var(--charcoal);padding:60px 60px 38px;}
 .fcopy{font-family:'Oswald',sans-serif;font-size:9px;letter-spacing:2px;color:rgba(245,237,216,.22);}
 .fpv{font-family:'Caveat',cursive;font-size:14px;color:var(--ochre);}
 
-/* MOBILE */
+/* TABLET: 641–920px */
 @media(max-width:920px){
-  body{cursor:auto;}
-  .cur,.cur-ring{display:none;}
   nav{padding:12px 20px;}
   .nlinks,.ncta{display:none;}
   .nav-toggle{display:block;}
-  .hero-content{padding:0 22px 56px;}
+  .hero-content{padding:0 26px 64px;}
   .h-scroll{display:none;}
-  .si{padding:0 20px;}
+  .si{padding:0 24px;}
   .story-grid,.craft-head,.chef-inner,.blog-grid{grid-template-columns:1fr;gap:40px;}
-  .mgrid,.csteps{grid-template-columns:1fr 1fr;}
+  .mgrid{grid-template-columns:1fr 1fr;}
+  .csteps{grid-template-columns:1fr 1fr;}
   .chef-facts{grid-template-columns:1fr 1fr;}
   .story,.menu,.craft,.chef,.blog,.cta{padding:80px 0;}
-  .cta-inner{padding:0 20px;}
+  .cta-inner{padding:0 24px;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
   footer{padding:44px 20px 30px;}
   .blog-right{flex-direction:column;}
-  .chef-photo-wrap{max-width:300px;margin:0 auto;}
+  .chef-photo-wrap{max-width:320px;margin:0 auto;}
   .lang-bar{padding:10px 18px;}
-  .mgrid{grid-template-columns:1fr;}
-  .csteps{grid-template-columns:1fr 1fr;}
   .cstep{border-right:none;border-bottom:1px solid rgba(44,26,14,.1);}
   .cstep:last-child{border:none;}
+  .sticky-box{position:static;}
+  .mcard:hover{transform:none;}
+  .blog-main:hover{transform:none;}
+  .blog-sm:hover{transform:translateX(0);}
 }
 
-@media(max-width:480px){
+/* MOBILE: ≤640px */
+@media(max-width:640px){
+  .si{padding:0 18px;}
   .mgrid,.csteps{grid-template-columns:1fr;}
+  .hero-content{padding:0 20px 56px;}
+  .h1{font-size:clamp(40px,11vw,64px);}
+  .h-desc{font-size:15px;}
+  .h-ctas{gap:10px;}
+  .btn-fire,.btn-ghost,.btn-white{min-height:48px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+  .h-ctas .btn-fire,.h-ctas .btn-ghost{padding:14px 24px;font-size:11px;width:100%;justify-content:center;box-sizing:border-box;}
+  .story,.menu,.craft,.chef,.blog,.cta{padding:60px 0;}
+  .sh2{font-size:clamp(26px,7vw,34px);}
+  .mh2{font-size:clamp(28px,8vw,36px);}
+  .ch2{font-size:clamp(24px,7vw,30px);}
+  .blog-grid{grid-template-columns:1fr;}
+  .blog-right{flex-direction:column;gap:2px;}
+  .cta-btns{flex-direction:column;gap:10px;align-items:stretch;}
+  .cta-btns a{text-align:center;width:100%;}
   .footer-grid{grid-template-columns:1fr;}
   .chef-facts{grid-template-columns:1fr 1fr;}
-  .h1{font-size:48px;}
+  .cinco{padding:28px 20px;}
+  .mcard{padding:28px 20px;}
+  .nav-toggle{font-size:20px;padding:10px 14px;min-height:44px;touch-action:manipulation;}
+  .lang-btn{min-height:40px;}
+}
+
+/* SMALL PHONES: ≤380px */
+@media(max-width:380px){
+  .h1{font-size:36px;}
+  .si{padding:0 14px;}
+  .hero-content{padding:0 16px 48px;}
+  .cta-inner{padding:0 16px;}
 }
 
 /* LANGUAGE */
@@ -253,9 +294,6 @@ footer{background:var(--charcoal);padding:60px 60px 38px;}
 </style>
 </head>
 <body class="lang-es">
-
-<div class="cur" id="cur"></div>
-<div class="cur-ring" id="cr"></div>
 
 <!-- MOBILE NAV OVERLAY -->
 <div class="mobile-nav" id="mobileNav">
@@ -471,7 +509,7 @@ footer{background:var(--charcoal);padding:60px 60px 38px;}
     <h2 class="cta-h2 r-up d1"><span class="es">Dóblala.<br>Que chorree.<br><em>Así se come.</em></span><span class="en">Fold it.<br>Let it drip.<br><em>That's how it's eaten.</em></span></h2>
     <p class="cta-body r-up d2"><span class="es">Horno de leña al aire libre. Masa amasada esa mañana. Jamón curado en casa. La pizza que alimentó a Cuba — ahora en Puerto Vallarta. Solo hacemos un número limitado de pizzas cada día.</span><span class="en">Outdoor wood-fired oven. Dough kneaded that morning. House-cured ham. The pizza that fed Cuba — now in Puerto Vallarta. We only make a limited number of pizzas each day.</span></p>
     <div class="cta-btns r-up d2">
-      <a href="https://wa.me/521" class="btn-white"><span class="es">📱 Ordenar por WhatsApp</span><span class="en">📱 Order on WhatsApp</span></a>
+      <a href="https://wa.me/5213223041169?text=Hola!%20Quiero%20ordenar%20una%20pizza%20cubana%20🍕" class="btn-white"><span class="es">📱 Ordenar por WhatsApp</span><span class="en">📱 Order on WhatsApp</span></a>
       <a href="#top" class="btn-ghost" style="color:rgba(245,237,216,.8);border-color:rgba(245,237,216,.28);"><span class="es">📍 Cómo Llegar</span><span class="en">📍 Get Directions</span></a>
     </div>
     <p class="cta-loc r-up d3">📍 <strong>Puerto Vallarta, Jalisco, México</strong> <span class="es">— Horno al aire libre</span><span class="en">— Outdoor wood-fired oven</span></p>
@@ -511,16 +549,12 @@ footer{background:var(--charcoal);padding:60px 60px 38px;}
 </footer>
 
 <script>
-// CURSOR (desktop only)
-const cur=document.getElementById('cur'),cr=document.getElementById('cr');
-if(cur&&cr){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();document.querySelectorAll('a,button,.mcard,.blog-main,.blog-sm,.cstep,.cfact').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.4)';cr.style.transform='translate(-50%,-50%) scale(1.7)';cr.style.opacity='.85';});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';cr.style.transform='translate(-50%,-50%) scale(1)';cr.style.opacity='.45';});});}
-
 // MOBILE NAV
 function openMobileNav(){document.getElementById('mobileNav').classList.add('open');document.body.style.overflow='hidden';}
 function closeMobileNav(){document.getElementById('mobileNav').classList.remove('open');document.body.style.overflow='';}
 
-// SCROLL REVEAL
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1});
+// SCROLL REVEAL — optimised for mobile (lower threshold + rootMargin pre-trigger)
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:0.06,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.r-up,.r-left,.r-right,.r-scale').forEach(el=>obs.observe(el));
 
 // STICKY NAV

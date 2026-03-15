@@ -2,20 +2,21 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>La Historia – La Pizza Cubana · Puerto Vallarta</title>
 <meta name="description" content="La historia completa de la pizza cubana: cómo sobrevivió el Período Especial, llegó a Miami, y llegó a Puerto Vallarta. / The full history of Cuban pizza.">
+<meta property="og:title" content="La Historia de la Pizza Cubana">
+<meta property="og:description" content="Cómo la pizza cubana sobrevivió el Período Especial y llegó a Puerto Vallarta.">
+<meta property="og:url" content="https://la-pizza-cubana.vercel.app/la-historia">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Oswald:wght@300;400;500;600;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#F5EDD8;--cream-dark:#EAD9B8;--paprika:#C0392B;--paprika-dark:#922B21;--charcoal:#1A1209;--tobacco:#2C1A0E;--ochre:#C97A2A;--ochre-light:#E8A84C;--ash:#7A6550;--warm-white:#FDF8F0;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--charcoal);font-family:'Libre Baskerville',Georgia,serif;overflow-x:hidden;cursor:none;}
-
-/* CURSOR */
-.cur{width:12px;height:12px;border-radius:50%;background:var(--paprika);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s;mix-blend-mode:multiply;}
-.cur-ring{width:40px;height:40px;border:1.5px solid var(--paprika);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .28s cubic-bezier(.25,.46,.45,.94);opacity:.45;}
+body{background:var(--cream);color:var(--charcoal);font-family:'Libre Baskerville',Georgia,serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 
 /* LANG BAR */
 .lang-bar{position:fixed;top:0;left:0;right:0;z-index:700;display:flex;justify-content:flex-end;padding:12px 44px;background:linear-gradient(to bottom,rgba(20,12,4,.9),transparent);}
@@ -138,25 +139,38 @@ footer{background:var(--charcoal);padding:60px 60px 38px;}
 .r-up.on{opacity:1;transform:none;}
 .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
 
-/* MOBILE */
+/* TABLET: 641–920px */
 @media(max-width:920px){
-  body{cursor:auto;}
-  .cur,.cur-ring{display:none;}
   nav{padding:12px 20px;}.nlinks,.ncta{display:none;}.nav-toggle{display:block;}
-  .page-hero{padding:140px 22px 70px;}
-  .content-wrap{padding:0 22px;}
-  .lang-divider{padding:18px 22px;}
+  .page-hero{padding:140px 26px 70px;}
+  .content-wrap{padding:0 24px;}
+  .lang-divider{padding:18px 24px;}
   .hist-section{padding:56px 0;}
-  .five-rules{padding:32px 22px;}
+  .five-rules{padding:32px 24px;}
   .compare-table{font-size:12px;}
   .compare-table th,.compare-table td{padding:10px 12px;}
   footer{padding:44px 20px 30px;}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
-  .section-lang-header{padding:44px 22px 0;}
+  .section-lang-header{padding:44px 24px 0;}
 }
 
-@media(max-width:480px){
+/* MOBILE: ≤640px */
+@media(max-width:640px){
+  .content-wrap{padding:0 18px;}
+  .lang-divider{padding:14px 18px;}
+  .page-hero{padding:120px 18px 56px;}
+  .page-hero h1{font-size:clamp(32px,9vw,52px);}
+  .section-lang-header{padding:36px 18px 0;}
+  .five-rules{padding:24px 18px;}
+  .hist-section{padding:44px 0;}
   .footer-grid{grid-template-columns:1fr;}
+  .back-to-top{min-height:48px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation;}
+}
+
+/* SMALL PHONES: ≤380px */
+@media(max-width:380px){
+  .content-wrap{padding:0 14px;}
+  .page-hero{padding:100px 14px 48px;}
 }
 
 /* LANGUAGE TOGGLE */
@@ -165,9 +179,6 @@ footer{background:var(--charcoal);padding:60px 60px 38px;}
 </style>
 </head>
 <body class="lang-es">
-
-<div class="cur" id="cur"></div>
-<div class="cur-ring" id="cr"></div>
 
 <!-- MOBILE NAV OVERLAY -->
 <div class="mobile-nav" id="mobileNav">
@@ -499,10 +510,6 @@ footer{background:var(--charcoal);padding:60px 60px 38px;}
 </footer>
 
 <script>
-// CURSOR (desktop only)
-const cur=document.getElementById('cur'),cr=document.getElementById('cr');
-if(cur&&cr){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(a);})();}
-
 // MOBILE NAV
 function openMobileNav(){document.getElementById('mobileNav').classList.add('open');document.body.style.overflow='hidden';}
 function closeMobileNav(){document.getElementById('mobileNav').classList.remove('open');document.body.style.overflow='';}
